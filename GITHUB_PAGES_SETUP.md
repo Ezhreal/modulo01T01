@@ -35,10 +35,12 @@ git push -u origin main
 1. Vá para o repositório no GitHub
 2. Clique em **Settings** (Configurações)
 3. No menu lateral, clique em **Pages**
-4. Em **Source**, selecione:
-   - **Branch**: `gh-pages` (será criado automaticamente pelo workflow)
-   - **Folder**: `/ (root)` ou deixe como está
+4. Em **Source** (Fonte), **IMPORTANTE**: Selecione:
+   - **GitHub Actions** (NÃO use "Deploy from a branch")
+   - Isso permitirá que o workflow automático faça o deploy
 5. Clique em **Save**
+
+**⚠️ Atenção:** Se você selecionar "Deploy from a branch", o workflow automático não funcionará. Use sempre "GitHub Actions" quando tiver um workflow configurado.
 
 ### 4. Ativar GitHub Actions (se necessário)
 
@@ -102,10 +104,21 @@ O GitHub Actions fará o deploy automaticamente em alguns minutos!
 
 ## ❓ Problemas Comuns
 
+### ❌ Erro 404: "There isn't a GitHub Pages site here"
+**Solução completa:** Veja o arquivo `TROUBLESHOOTING.md` para um guia detalhado.
+
+**Solução rápida:**
+1. Vá em **Actions** e verifique se o workflow foi executado
+2. Se não foi, faça um push: `git push`
+3. Se falhou, veja o erro em Actions e corrija
+4. Aguarde 5-10 minutos após o workflow terminar
+5. Verifique se **Source** está como **"GitHub Actions"** em Settings > Pages
+
 ### Site não aparece
 - Aguarde 5-10 minutos após o primeiro deploy
 - Verifique se o workflow terminou com sucesso em **Actions**
 - Verifique se o GitHub Pages está ativado em **Settings** > **Pages**
+- Limpe o cache do navegador (Ctrl+F5)
 
 ### Imagens não carregam
 - Verifique se o `base` no `vite.config.js` está correto
