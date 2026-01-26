@@ -6,7 +6,7 @@ import react from '@vitejs/plugin-react'
 // Exemplo: se o repositório for "usuario/modulos", use base: '/modulos/'
 export default defineConfig({
   plugins: [react()],
-  base: '/', // Para GitHub Pages na raiz, mantenha '/'
+  base: '/modulo01T01/', // Nome do repositório no GitHub Pages
   server: {
     port: 3099,
     open: true
