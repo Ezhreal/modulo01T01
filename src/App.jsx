@@ -45,21 +45,56 @@ function App() {
   const [searchParams, setSearchParams] = useSearchParams()
   const { playAudio } = useAudioContext()
   const [currentTela, setCurrentTela] = useState(() => {
-    // Recupera a última tela do localStorage ou usa a primeira
-    const saved = localStorage.getItem('lastTela')
-    return saved ? parseInt(saved) : 1
+    // Sempre inicia na tela 1, independente do localStorage
+    // O scroll vai atualizar para a tela correta
+    return 1
   })
 
-  // Sincroniza URL com a tela atual
+  // Sincroniza URL com a tela atual (mas só se não estiver no topo)
   useEffect(() => {
     const telaFromUrl = searchParams.get('tela')
     if (telaFromUrl) {
       const telaNum = parseInt(telaFromUrl)
       if (!isNaN(telaNum) && telaNum >= 1) {
-        setCurrentTela(telaNum)
+        // Se estiver no topo da página, força tela 1
+        if (window.scrollY < 100 && telaNum === 1) {
+          setCurrentTela(1)
+        } else if (telaNum >= 2) {
+          setCurrentTela(telaNum)
+        }
       }
     }
   }, [searchParams])
+
+  // Verifica a posição inicial ao carregar a página
+  useEffect(() => {
+    const checkInitialPosition = () => {
+      // Se estiver no topo da página, garante que está na tela 1
+      if (window.scrollY < 50) {
+        setCurrentTela(1)
+      } else {
+        // Se não estiver no topo, detecta qual tela está visível
+        const sections = document.querySelectorAll('section[id^="tela"]')
+        const scrollPosition = window.scrollY + window.innerHeight / 2
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop
+          const sectionHeight = section.offsetHeight
+          const sectionId = section.id
+          const telaNum = parseInt(sectionId.replace('tela', ''))
+
+          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            setCurrentTela(telaNum)
+          }
+        })
+      }
+    }
+    
+    // Verifica após um pequeno delay para garantir que o DOM está pronto
+    setTimeout(checkInitialPosition, 200)
+    window.addEventListener('load', checkInitialPosition)
+    return () => window.removeEventListener('load', checkInitialPosition)
+  }, [])
 
   // Detecta mudança de scroll e atualiza a tela atual
   useEffect(() => {
@@ -83,6 +118,9 @@ function App() {
       })
     }
 
+    // Verifica posição inicial
+    handleScroll()
+    
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [currentTela, setSearchParams])
