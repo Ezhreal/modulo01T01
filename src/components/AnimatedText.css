@@ -1,0 +1,38 @@
+.animated-text-container {
+  display: inline;
+  line-height: inherit;
+}
+
+.animated-text-phrase {
+  opacity: 0;
+  display: inline;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition-delay: var(--phrase-delay, 0s);
+}
+
+.animated-text-phrase.visible {
+  opacity: 1;
+}
+
+/* Fade In */
+.animated-text-phrase.fadeIn {
+  transform: none;
+}
+
+/* Fade Up */
+.animated-text-phrase.fadeUp {
+  transform: translateY(20px);
+}
+
+.animated-text-phrase.fadeUp.visible {
+  transform: translateY(0);
+}
+
+/* Fade Down */
+.animated-text-phrase.fadeDown {
+  transform: translateY(-20px);
+}
+
+.animated-text-phrase.fadeDown.visible {
+  transform: translateY(0);
+}

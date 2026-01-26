@@ -1,0 +1,2026 @@
+.app {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+.section {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.tela-capa {
+  background-image: url('./assets/images/bg-capa.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0;
+  min-height: 100vh;
+}
+
+.tela-conteudo {
+  padding: 2rem 0;
+}
+
+.tela-capa-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  min-height: calc(100vh - 4rem);
+}
+
+.tela-capa-logo {
+  margin-bottom: 1.5rem;
+}
+
+.tela-capa-logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+.tela-capa-modulo {
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.tela-capa-titulo {
+  color: white;
+  margin: 0;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.tela-capa-scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: auto;
+  margin-bottom: 0;
+}
+
+.tela-capa-scroll-texto {
+  color: var(--cor-azul);
+}
+
+.tela-capa-scroll-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Tela Simples (Tela 02) */
+.tela-simples {
+  background: var(--cor-amarelo-bg);
+  padding: 4rem 0;
+}
+
+.tela-simples.bg-video {
+  background-image: url('./assets/images/bg-video.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.tela-simples-content {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.tela-simples-numero {
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.tela-simples-titulo {
+  color: var(--cor-azul);
+  margin: 0;
+}
+
+.tela-simples-texto {
+  color: var(--cor-azul);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.tela-simples-video {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.tela-simples-video iframe {
+  width: 100%;
+  height: 720px;
+  border: none;
+  border-radius: 8px;
+}
+/* Tela 03 (antiga Tela 02) */
+.tela02 {
+  display: block;
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--cor-amarelo-bg);
+}
+
+.tela02-top {
+     position: relative;
+}
+
+/* Section como referência */
+.tela02 {
+  position: relative;
+}
+/* Section como referência */
+.tela02 {
+  position: relative;
+}
+/* Estrelas amarelas - nas linhas horizontais */
+.tela02-bottom {
+  position: relative;
+}
+
+/* Estrelas amarelas - todas na borda inferior */
+.star-yellow {
+  position: absolute;
+  bottom: -20px; /* todas na mesma altura - borda inferior */
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}
+
+.star-yellow-1 {
+  left: 15%; /* ajuste a posição conforme necessário */
+}
+
+.star-yellow-2 {
+  left: 30%;
+}
+
+.star-yellow-3 {
+  left: 70%;
+}
+
+.star-yellow-4 {
+  left: 85%;
+}
+
+/* Estrelas azuis - nas linhas verticais (centro) */
+.star-blue-left, .star-yellow-left {
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+}
+
+.star-blue-right, .star-yellow-right {
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+}
+
+.tela02-container-border {
+  position: relative;
+}
+/* Bordas verticais - alinhadas com o container de 1240px */
+.tela02::before {
+  content: '';
+  position: absolute;
+  left: calc((100% - 1240px) / 2); /* centraliza na largura do container */
+  top: -9999px;
+  bottom: -9999px;
+  width: 2px;
+  background-color: var(--cor-azul);
+}
+
+.tela02::after {
+  content: '';
+  position: absolute;
+  right: calc((100% - 1240px) / 2); /* centraliza na largura do container */
+  top: -9999px;
+  bottom: -9999px;
+  width: 2px;
+  background-color: var(--cor-azul);
+}
+
+/* Bordas horizontais no container - largura total da tela */
+.tela02-container-border {
+  position: relative;
+}
+
+.tela02-container-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 2px;
+  background-color: var(--cor-azul);
+}
+
+.tela02-container-border::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 2px;
+  background-color: var(--cor-azul);
+}
+
+.margin-vertical-60 {
+  margin-top: 60px !important;
+  margin-bottom: 60px !important;
+}
+
+.tela02-top-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  padding: 45px;
+}
+
+.tela02-bottom-content {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 3rem;
+  align-items: center;
+  padding: 45px;
+}
+
+.tela02-left {
+  /* Usa classe utilitária flex-column-small */
+}
+
+.tela02-titulo {
+  color: var(--cor-azul);
+  margin: 0;
+}
+
+.tela02-texto {
+  color: var(--cor-azul);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.tela02-texto-sequencia {
+  color: var(--cor-azul);
+  margin-top: 1rem;
+}
+
+.tela02-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tela02-foto {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: cover;
+}
+
+.tela02-bottom {
+  background: var(--cor-azul);
+  position: relative;
+}
+
+
+.tela02-icon {
+  flex-shrink: 0;
+}
+
+.tela02-icon img {
+  width: 120px;
+  height: auto;
+}
+
+.tela02-bottom-text {
+  display: flex;
+  align-items: center;
+}
+
+.tela02-bottom-paragrafo {
+  color: white;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.tela04 {
+  position: relative;
+  background-color: var(--cor-azul);
+  padding: 4rem 0;
+  margin: 300px 0 0;
+  z-index: 1;
+}
+
+
+
+.icon-top {
+  position: absolute;
+  top: -150px;
+  left: calc(50% - 60px);
+  z-index: 1;
+}
+
+
+.icon-bottom {
+  position: absolute;
+  bottom: -200px;
+  left: calc(50% - 60px);
+  z-index: 1;
+}
+.icon-birds {
+  width: auto;
+  height: 120px;
+}
+
+.tela04-icon-taca {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.icon-taca {
+  width: auto;
+  height: 120px;
+}
+
+/* Onda superior azul */
+.tela04::before {
+  content: '';
+  position: absolute;
+  top: -290px;
+  left: 0;
+  width: 100%;
+  height: 290px; /* ajuste conforme a altura do PNG */
+  background-image: url('./assets/images/top-blue.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+.tela04-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.tela04-numero {
+  display: flex;
+}
+
+.tela04-titulo {
+  color: var(--cor-amarelo-claro);
+  margin: 0;
+}
+
+.tela04-texto {
+  color: white;
+  line-height: 1.4;
+  margin: 0;
+}
+
+
+
+.tela04-img01 {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.divisor-yellow {
+  width: 100%;
+  height: 2px;
+  background-color: var(--cor-amarelo-claro);
+  margin: 3rem 0;
+}
+.no-padding {padding: 0;}
+.citacao {
+  width: 100%;
+  min-height: 200px;
+  background-image: url(/src/assets/images/bg-citacao.png);
+  background-position: bottom;
+  background-repeat: no-repeat;
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  padding: 6rem 2rem;
+  margin-bottom: -2em;
+}
+.citacao-texto {
+  color: white;
+  font-style: italic;
+  text-align: center;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.citacao-texto .citacao-aspas {
+  font-family: var(--fonte-garamond);
+  font-weight: 700;
+  font-style: italic;
+  text-align: center;
+  display: block;
+  font-size: 250px;
+  line-height: 0.3;
+}
+
+.tela05-box-azul {
+  background: var(--cor-azul-escuro);
+  width: 100%;
+  min-height: 200px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tela05 {
+  position: relative;
+  background-color: var(--cor-azul);
+  padding: 4rem 0;
+  margin:  0 0 300px;
+  z-index: 1;
+  
+}
+
+/* Onda inferior azul */
+.tela05::after {
+  content: '';
+  position: absolute;
+  bottom: -290px;
+  left: 0;
+  width: 100%;
+  height: 290px; /* ajuste conforme a altura do PNG */
+  background-image: url('./assets/images/bottom-blue.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.tela05-box-texto {
+  color: white;
+  text-align: center;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.text-end {
+text-align: right;
+}
+
+.tela05-container-border {
+  position: relative;
+}
+
+/* Bordas verticais - alinhadas com o container de 1240px */
+.tela05-hold-lines::before {
+  content: '';
+  position: absolute;
+  left: calc((100% - 1240px) / 2); /* centraliza na largura do container */
+  top: -0;
+  bottom: -25%;
+  width: 2px;
+  z-index: 1;
+  background-color: var(--cor-amarelo-claro);
+}
+
+.tela05-hold-lines::after {
+  content: '';
+  position: absolute;
+  right: calc((100% - 1240px) / 2); /* centraliza na largura do container */
+  top: -0;
+  bottom: -25%;
+  width: 2px;
+  z-index: 1;
+  background-color: var(--cor-amarelo-claro);
+}
+
+/* Bordas horizontais no container - largura total da tela */
+.tela05-hold-lines {
+  position: relative;
+}
+
+.tela05-container-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 2px;
+  background-color: var(--cor-amarelo-claro);
+}
+
+.tela05-container-border::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 2px;
+  background-color: var(--cor-amarelo-claro);
+}
+
+
+.divisor {margin: 40px 0;}
+
+/* Tela 06 */
+.tela06 {
+  background-color: white;
+  padding: 4rem 0;
+}
+
+.tela06-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  padding: 2rem;
+}
+
+.tela06-numero {
+  display: flex;
+  justify-content: center;
+}
+
+.tela06-imagem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -280px;
+}
+
+.tela06-img {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+}
+
+.tela06-textos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32rem;
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.tela06-texto {
+  font-family: var(--fonte-garamond);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--cor-azul);
+  font-size: 36px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.tela06-texto-direita {
+  text-align: right;
+}
+
+/* Tela 08 */
+.tela08 {
+  background-color: var(--cor-amarelo-bg);
+  position: relative;
+}
+
+.tela08.bg-circle-yellow {
+  background-image: url('./assets/images/bg-circle-yellow.png');
+  background-size: auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.tela08-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  padding: 2rem;
+}
+
+.tela08-numero {
+  display: flex;
+  justify-content: center;
+}
+
+.tela08-tres-colunas {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  width: 100%;
+  align-items: start;
+  padding: 2rem;
+}
+
+.tela08-coluna-esquerda {
+  display: flex;
+  align-items: flex-start;
+}
+
+.tela08-coluna-centro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tela08-img {
+  width: 100%;
+  height: auto;
+  margin-bottom:-6rem;
+}
+
+.tela08-coluna-direita {
+  display: flex;
+  align-items: flex-end;
+  text-align: right;
+  align-self: flex-end;
+}
+
+.tela08-texto {
+  font-family: var(--fonte-garamond);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 36px;
+  color: var(--cor-azul);
+  line-height: 1.4;
+  margin: 0;
+}
+
+
+/* Tela 09 */
+.tela09 {
+  background-color: var(--cor-azul);
+  padding: 4rem 0;
+}
+
+.tela09-content {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.tela09-coluna-imagem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tela09-img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+}
+
+.tela09-coluna-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: left;
+}
+
+.tela09-numero {
+  display: flex;
+}
+
+.tela09-intro {
+  color: var(--cor-amarelo-claro);
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.tela09-accordions {
+  width: 100%;
+}
+
+.tela09-accordion-content {
+  padding: 1.5rem 0;
+}
+
+.tela09-accordion-texto {
+  font-family: var(--fonte-inter);
+  font-weight: 400;
+  color: white;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Estilos específicos para accordions da tela 09 */
+.tela09 .accordion-item {
+  border-bottom: none;
+  margin-bottom: 1rem;
+}
+
+.tela09 .accordion-header {
+  background: #184E9D;
+  color: #FEF1D0;
+  padding: 1.5rem;
+  font-family: var(--fonte-garamond);
+  font-weight: 700;
+  font-size: 36px;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.tela09 .accordion-header:hover {
+  background: #1a5bb3;
+}
+
+.tela09 .accordion-header.active {
+  background: #1a5bb3;
+}
+
+.tela09 .accordion-icon {
+  color: #FEF1D0;
+  font-size: 2rem;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  line-height: 18px;
+  text-align: center;
+  border-radius: 50%;
+  border: 2px solid #FEF1D0;
+  background: transparent;
+}
+
+.tela09 .accordion-content {
+  background: #184E9D;
+  overflow: hidden;
+  animation: slideDown 0.3s ease;
+}
+
+.tela09 .accordion-body {
+  padding: 1.5rem;
+  background: #184E9D;
+}
+
+/* Tela 10 */
+.tela10 {
+  position: relative;
+  background-color: var(--cor-azul);
+  padding: 4rem 0;
+  z-index: 1;
+}
+
+.tela10-container-border {
+  position: relative;
+}
+
+/* Bordas verticais - alinhadas com o container de 1240px */
+.tela10-hold-lines::before {
+  content: '';
+  position: absolute;
+  left: calc((100% - 1240px) / 2); /* centraliza na largura do container */
+  top: -0;
+  bottom: -6%;
+  width: 2px;
+  z-index: 1;
+  background-color: var(--cor-amarelo-claro);
+}
+
+.tela10-hold-lines::after {
+  content: '';
+  position: absolute;
+  right: calc((100% - 1240px) / 2); /* centraliza na largura do container */
+  top: -0;
+  bottom: -6%;
+  width: 2px;
+  z-index: 1;
+  background-color: var(--cor-amarelo-claro);
+}
+
+/* Bordas horizontais no container - largura total da tela */
+.tela10-hold-lines {
+  position: relative;
+}
+
+.tela10-container-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 2px;
+  background-color: var(--cor-amarelo-claro);
+}
+
+.tela10-container-border::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 2px;
+  background-color: var(--cor-amarelo-claro);
+}
+
+.tela10-box-azul {
+  background: var(--cor-azul-escuro);
+  width: 100%;
+  min-height: 200px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tela10-box-texto {
+  color: white;
+  text-align: center;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.tela10-footer {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1240px;
+  padding: 2rem;
+  margin-top: 3rem;
+}
+
+.tela10-footer-icon {
+  flex-shrink: 0;
+}
+
+.tela10-footer p {
+  color: white;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.tela10-texto-intro {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.tela10-texto-intro p {
+  color: white;
+  margin: 0;
+}
+
+/* Tela 12 */
+.tela12 {
+  background-color: var(--cor-azul);
+  padding: 4rem 0;
+}
+
+.tela12-container-full {
+  position: relative;
+}
+
+.tela12-numero {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.tela12-tres-colunas {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3rem;
+  width: 100%;
+  padding: 2rem;
+  margin-bottom: 3rem;
+}
+
+.tela12-coluna {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.tela12-coluna-primeira {
+  margin-bottom: -20rem;
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.tela12-coluna-meio {
+  margin-bottom: 0;
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.tela12-coluna-terceira {
+  margin-bottom: -10rem;
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.tela12-texto {
+  font-family: var(--fonte-garamond);
+  font-weight: 700;
+  font-size: 36px;
+  color: var(--cor-amarelo-claro);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.tela12-imagem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 2rem;
+  position: relative;
+}
+
+.tela12-imagem.bg-circle-blue {
+  background-image: url('./assets/images/bg-circle-blue.png');
+  background-size: auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.tela12-img {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+}
+
+.tela12-bg-title {
+  background-image: url('./assets/images/bg-texto-title.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  padding: 3rem 2rem;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.tela12-titulo-1 {
+  color: var(--cor-amarelo-claro);
+  font-weight: 700;
+  font-size: 32px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.tela12-titulo-2 {
+  color: var(--cor-amarelo-claro);
+  font-weight: 700;
+  font-size: 48px;
+  text-align: center;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.tela12-texto-longo {
+  color: white;
+  line-height: 1.4;
+  margin: 2rem 0;
+  text-align: left;
+}
+
+/* Tela 13 */
+.tela13 {
+  background-color: var(--cor-azul);
+  padding: 300px 0;
+  position: relative;
+}
+
+.tela13-inner {
+  position: relative;
+  background-color: var(--cor-amarelo-bg);
+  padding: 4rem 0;
+  z-index: 1;
+}
+
+/* Onda superior amarela */
+.tela13-inner::before {
+  content: '';
+  position: absolute;
+  top: -290px;
+  left: 0;
+  width: 100%;
+  height: 290px;
+  background-image: url('./assets/images/top-yellow.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: -1;
+}
+
+/* Onda inferior amarela */
+.tela13-inner::after {
+  content: '';
+  position: absolute;
+  bottom: -290px;
+  left: 0;
+  width: 100%;
+  height: 290px;
+  background-image: url('./assets/images/bottom-yellow.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: -1;
+}
+
+.tela13-container-border {
+  position: relative;
+}
+
+/* Bordas verticais - alinhadas com o container de 1240px */
+.tela13-hold-lines::before {
+  content: '';
+  position: absolute;
+  left: calc((100% - 1240px) / 2);
+  top: -0;
+  bottom: -6%;
+  width: 2px;
+  z-index: 1;
+  background-color: var(--cor-amarelo-claro);
+}
+
+.tela13-hold-lines::after {
+  content: '';
+  position: absolute;
+  right: calc((100% - 1240px) / 2);
+  top: -0;
+  bottom: -6%;
+  width: 2px;
+  z-index: 1;
+  background-color: var(--cor-amarelo-claro);
+}
+
+/* Bordas horizontais no container - largura total da tela */
+.tela13-hold-lines {
+  position: relative;
+}
+
+.tela13-container-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 2px;
+  background-color: var(--cor-amarelo-claro);
+}
+
+.tela13-container-border::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 2px;
+  background-color: var(--cor-amarelo-claro);
+}
+
+.tela13-texto-intro {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.tela13-texto-intro p {
+  color: white;
+  margin: 0;
+}
+
+.tela13-box-azul {
+  background: var(--cor-azul-escuro);
+  width: 100%;
+  min-height: 200px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tela13-box-texto {
+  color: white;
+  text-align: center;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.icon-birds-blue {
+  width: auto;
+  height: 120px;
+}
+
+.tela13 .icon-top {
+  position: absolute;
+  top: -150px;
+  left: calc(50% - 60px);
+  z-index: 1;
+}
+
+.tela13 .icon-bottom {
+  position: absolute;
+  bottom: 15px;
+  left: calc(50% - 60px);
+  z-index: 1;
+}
+
+.tela13-conteudo {
+  padding: 2rem 0;
+  position: relative;
+}
+
+.tela13-conteudo .icon-top {
+  position: absolute;
+  top: 15px;
+  left: calc(50% - 60px);
+  z-index: 1;
+}
+
+.tela13-conteudo .icon-bottom {
+  position: absolute;
+  bottom: 15px;
+  left: calc(50% - 60px);
+  z-index: 1;
+}
+
+.tela13-imagem-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: -15rem;
+  margin-bottom: 3rem;
+}
+
+.tela13-img-1 {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+}
+
+.tela13-textos-duas-colunas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32rem;
+  width: 100%;
+  padding: 0 2rem;
+  margin-bottom: 3rem;
+}
+
+.tela13-texto-esquerda {
+  display: flex;
+  align-items: flex-start;
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.tela13-texto-direita {
+  display: flex;
+  align-items: flex-end;
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.tela13-texto {
+  font-family: var(--fonte-garamond);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 36px;
+  color: var(--cor-azul);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.tela13-box-taca {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: var(--cor-azul-escuro);
+  width: 100%;
+  padding: 2rem;
+  margin: 4rem 0;
+}
+
+.tela13-box-taca-icon {
+  flex-shrink: 0;
+}
+
+.tela13-box-taca-texto {
+  color: white;
+  text-align: left;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.tela13-imagem-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: -15rem;
+  margin-top: 3rem;
+}
+
+.tela13-img-2 {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+}
+
+.tela13-textos-soltos {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  padding: 2rem;
+  margin-top: 3rem;
+}
+
+.tela13-texto-solto {
+  font-family: var(--fonte-garamond);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 36px;
+  color: var(--cor-azul);
+  line-height: 1.4;
+  margin: 0;
+  text-align: center;
+}
+
+/* Tela 14 */
+.tela14 {
+  background-color: var(--cor-azul);
+  padding: 4rem 0;
+}
+
+.tela14-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.tela14-numero {
+  display: flex;
+  justify-content: center;
+}
+
+.tela14-intro {
+  color: var(--cor-amarelo-claro);
+  font-weight: 700;
+  font-size: 36px;
+  text-align: center;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.tela14-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.tela14-cards-linha-1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  width: 100%;
+}
+
+.tela14-cards-linha-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  width: 100%;
+  justify-content: center;
+  max-width: calc(66.66% + 2rem);
+  margin: 0 auto;
+}
+
+.tela14-card {
+  height: auto;
+}
+
+.tela14-card .card-flip {
+  height: auto;
+  min-height: 0;
+}
+
+.tela14-card-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.tela14-card .card-flip-inner {
+  height: auto;
+  min-height: 0;
+}
+
+.tela14-card .card-flip-front {
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  position: relative;
+  height: auto;
+  width: 100%;
+}
+
+.tela14-card .card-flip-front img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.tela14-card .card-flip-back {
+  background: var(--cor-azul-escuro);
+  color: white;
+  padding: 2rem;
+  border-radius: 0;
+  top:0;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 100%;
+}
+
+.tela14-card .card-flip-front img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.tela14-card-texto {
+  color: white;
+  text-align: center;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Tela 15 */
+.tela15 {
+  background-color: var(--cor-azul);
+  padding: 4rem 0;
+}
+
+.tela15-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.tela15-numero {
+  display: flex;
+  justify-content: center;
+}
+
+.tela15-texto {
+  color: var(--cor-amarelo-claro);
+  font-weight: 700;
+  font-size: 36px;
+  text-align: center;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.tela15-slide {
+  width: 100%;
+  margin: 3rem 0;
+}
+
+.tela15-texto-final {
+  color: var(--cor-amarelo-claro);
+  font-weight: 700;
+  font-size: 36px;
+  text-align: center;
+  margin: 3rem 0 0 0;
+  line-height: 1.4;
+}
+
+/* Tela 16 - Igual à tela 08 */
+.tela16 {
+  background-color: var(--cor-amarelo-bg);
+  position: relative;
+}
+
+.tela16.bg-circle-yellow {
+  background-image: url('./assets/images/bg-circle-yellow.png');
+  background-size: auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.tela16-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  padding: 2rem;
+}
+
+.tela16-numero {
+  display: flex;
+  justify-content: center;
+}
+
+.tela16-tres-colunas {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  width: 100%;
+  align-items: start;
+  padding: 2rem;
+}
+
+.tela16-coluna-esquerda {
+  display: flex;
+  align-items: flex-start;
+}
+
+.tela16-coluna-centro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tela16-img {
+  width: 100%;
+  height: auto;
+  margin-bottom:-6rem;
+}
+
+.tela16-coluna-direita {
+  display: flex;
+  align-items: flex-end;
+  text-align: right;
+  align-self: flex-end;
+}
+
+.tela16-texto {
+  font-family: var(--fonte-garamond);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 36px;
+  color: var(--cor-azul);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Tela 17 - Igual à tela 12 */
+.tela17 {
+  background-color: var(--cor-azul);
+  padding: 4rem 0;
+}
+
+.tela17-container-full {
+  position: relative;
+}
+
+.tela17-numero {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.tela17-tres-colunas {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3rem;
+  width: 100%;
+  padding: 2rem;
+  margin-bottom: 3rem;
+}
+
+.tela17-coluna {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.tela17-coluna-primeira {
+  margin-bottom: -20rem;
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.tela17-coluna-meio {
+  margin-bottom: 0;
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.tela17-coluna-terceira {
+  margin-bottom: -10rem;
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.tela17-texto {
+  font-family: var(--fonte-garamond);
+  font-weight: 700;
+  font-size: 36px;
+  color: var(--cor-amarelo-claro);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.tela17-imagem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 2rem;
+  position: relative;
+}
+
+.tela17-imagem.bg-circle-blue {
+  background-image: url('./assets/images/bg-circle-blue.png');
+  background-size: auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.tela17-img {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+}
+
+.tela17-bg-title {
+  background-image: url('./assets/images/bg-texto-title.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  padding: 3rem 2rem;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.tela17-titulo-1 {
+  color: var(--cor-amarelo-claro);
+  font-weight: 700;
+  font-size: 32px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.tela17-titulo-2 {
+  color: var(--cor-amarelo-claro);
+  font-weight: 700;
+  font-size: 48px;
+  text-align: center;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.tela17-texto-longo {
+  color: white;
+  line-height: 1.4;
+  margin: 2rem 0;
+  text-align: left;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+
+  .tela-conteudo {
+    padding: 2rem 0;
+  }
+
+  .tela-capa-logo {
+    margin-bottom: 1rem;
+  }
+
+  .tela-capa-titulo {
+    margin: 1.5rem 0;
+  }
+
+  .tela-capa-scroll {
+    margin: 2rem 0;
+  }
+
+  .tela-simples-content {
+    padding: 0 1rem;
+  }
+
+  /* Containers com padding no mobile */
+  .container {
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  .container-full {
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  /* Garantir que imagens não ultrapassem a largura */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Ajustes específicos para conteúdos das telas - remover padding duplicado se já tiver */
+  .tela02-top-content,
+  .tela02-bottom-content,
+  .tela04-content,
+  .tela06-content,
+  .tela08-content,
+  .tela09-content,
+  .tela12-tres-colunas,
+  .tela13-conteudo,
+  .tela14-content,
+  .tela15-content,
+  .tela16-content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Ajustes para imagens específicas */
+  .tela06-img,
+  .tela08-img,
+  .tela09-img,
+  .tela12-img,
+  .tela13-img-1,
+  .tela13-img-2,
+  .tela16-img,
+  .tela14-card-img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    box-sizing: border-box;
+  }
+
+  /* Garantir que divs com imagens também respeitem a largura */
+  .tela06-imagem,
+  .tela08-coluna-centro,
+  .tela09-coluna-imagem,
+  .tela12-imagem,
+  .tela13-imagem-1,
+  .tela13-imagem-2,
+  .tela16-coluna-centro {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .tela-simples-video iframe {
+    height: 480px;
+  }
+
+  .tela02-top-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .tela02-bottom-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .tela02-icon {
+    display: flex;
+    justify-content: center;
+  }
+
+  .tela04-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .divisor-yellow {
+    margin: 2rem 0;
+  }
+
+  /* Tela 06 - Mobile */
+  .tela06-textos {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .tela06-texto-direita {
+    text-align: left;
+  }
+
+  .tela06-imagem {
+    margin-top: -170px;
+  }
+
+  /* Tela 08 - Mobile */
+  .tela08-tres-colunas {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .tela08-coluna-centro {
+    order: 2;
+  }
+
+  .tela08-coluna-esquerda,
+  .tela08-coluna-direita {
+    order: 1;
+  }
+
+  /* Tela 09 - Mobile */
+  .tela09-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .tela09-coluna-imagem {
+    order: 2;
+  }
+
+  .tela09-coluna-texto {
+    order: 1;
+  }
+
+  /* Tela 12 - Mobile */
+  .tela12-tres-colunas {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+
+  .tela12-coluna {
+    text-align: left;
+    margin-bottom: 0 !important;
+    justify-content: flex-start !important;
+  }
+
+  .tela12-coluna-primeira,
+  .tela12-coluna-meio,
+  .tela12-coluna-terceira {
+    margin-bottom: 0;
+    text-align: left;
+    justify-content: flex-start;
+  }
+
+  /* Tela 13 - Mobile */
+  .tela13-textos-duas-colunas {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .tela13-texto-direita {
+    text-align: left;
+  }
+
+  /* Tela 14 - Mobile: Cards são transformados em slide pelo componente CardsSlide */
+
+  /* Tela 16 - Mobile */
+  .tela16-tres-colunas {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .tela16-coluna-centro {
+    order: 2;
+  }
+
+  .tela16-coluna-esquerda,
+  .tela16-coluna-direita {
+    order: 1;
+  }
+
+  /* Tela 02 - Mobile: Ajustes de linhas transversais */
+  .tela02::before,
+  .tela02::after {
+    display: none; /* Esconde bordas verticais no mobile */
+  }
+
+  .tela02-container-border::before,
+  .tela02-container-border::after {
+    width: 100%; /* Usa 100% ao invés de 100vw para evitar overflow */
+    left: 0;
+    transform: none;
+  }
+
+  /* Tela 05 - Mobile: Ajustes de linhas transversais */
+  .tela05-hold-lines::before,
+  .tela05-hold-lines::after {
+    display: none; /* Esconde bordas verticais no mobile */
+  }
+
+  .tela05-container-border::before,
+  .tela05-container-border::after {
+    width: 100%; /* Usa 100% ao invés de 100vw para evitar overflow */
+    left: 0;
+    transform: none;
+  }
+
+  /* Tela 10 - Mobile: Ajustes de linhas transversais */
+  .tela10-hold-lines::before,
+  .tela10-hold-lines::after {
+    display: none; /* Esconde bordas verticais no mobile */
+  }
+
+  .tela10-container-border::before,
+  .tela10-container-border::after {
+    width: 100%; /* Usa 100% ao invés de 100vw para evitar overflow */
+    left: 0;
+    transform: none;
+  }
+
+  /* Tela 13 - Mobile: Ajustes de linhas transversais */
+  .tela13-hold-lines::before,
+  .tela13-hold-lines::after {
+    display: none; /* Esconde bordas verticais no mobile */
+  }
+
+  .tela13-container-border::before,
+  .tela13-container-border::after {
+    width: 100%; /* Usa 100% ao invés de 100vw para evitar overflow */
+    left: 0;
+    transform: none;
+  }
+  .tela-capa, .tela02, .tela02-bottom, .tela04, .tela06, .tela09, .tela15 {
+    padding: 2rem;
+  }
+  .citacao {
+    padding: 2rem;
+  }
+  .tela-simples-numero {
+    margin-top: 2rem;
+   
+}
+
+.tela12 {
+  padding: 2rem 2rem 300px ;
+}
+
+.tela14 {
+  padding: 300px 2rem 2rem ;
+}
+.tela06-content {
+
+  padding: 0;
+}
+
+.tela13-box-taca {
+  display: flex;
+  align-items: center;
+ text-align: center;
+  flex-direction: column;
+}
+.tela17-texto-longo {padding-left: 2rem; padding-right: 2rem;}
+}
+
+/* Ajustes para tablets (1000px - 1400px) */
+@media (min-width: 1000px) and (max-width: 1400px) {
+  /* Tela 08 - Tablet: Destaque para imagem e evitar overflow */
+  .tela08-tres-colunas {
+    display: flex;
+    gap: 2rem;
+    align-items: start;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  .tela08-coluna-esquerda,
+  .tela08-coluna-direita {
+    flex: 0 0 18%;
+    min-width: 0;
+    max-width: 18%;
+  }
+
+  .tela08-coluna-centro {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 64%;
+  }
+
+  .tela08-img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Tela 16 - Tablet: Destaque para imagem e evitar overflow */
+  .tela16-tres-colunas {
+    display: flex;
+    gap: 2rem;
+    align-items: start;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  .tela16-coluna-esquerda,
+  .tela16-coluna-direita {
+    flex: 0 0 18%;
+    min-width: 0;
+    max-width: 18%;
+  }
+
+  .tela16-coluna-centro {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 64%;
+  }
+
+  .tela16-img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Ajustes de fonte e divisores para evitar overflow */
+  .tela08-texto,
+  .tela16-texto {
+    font-size: 28px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .tela08-coluna-esquerda .divisor,
+  .tela08-coluna-direita .divisor,
+  .tela16-coluna-esquerda .divisor,
+  .tela16-coluna-direita .divisor {
+    width: 100%;
+    max-width: 100%;
+    margin: 1.5rem 0;
+  }
+
+  .tela08-coluna-esquerda .divisor img,
+  .tela08-coluna-direita .divisor img,
+  .tela16-coluna-esquerda .divisor img,
+  .tela16-coluna-direita .divisor img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+ 
+
+}

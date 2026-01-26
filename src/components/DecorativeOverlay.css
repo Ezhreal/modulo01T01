@@ -1,0 +1,32 @@
+.decorative-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.decorative-line {
+  pointer-events: none;
+}
+
+.decorative-star {
+  pointer-events: none;
+  width: 60px;
+  height: 60px;
+}
+
+.decorative-star img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.star-shape {
+  width: 40px;
+  height: 40px;
+  background: var(--cor-azul);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}

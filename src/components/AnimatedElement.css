@@ -1,0 +1,83 @@
+.animated-element {
+  opacity: 0 !important;
+  transition: opacity var(--animation-duration, 0.6s) ease-out,
+              transform var(--animation-duration, 0.6s) ease-out !important;
+  transition-delay: var(--animation-delay, 0s) !important;
+  will-change: opacity, transform;
+}
+
+.animated-element.visible {
+  opacity: 1 !important;
+}
+
+.animated-element.visible {
+  opacity: 1;
+}
+
+/* Fade Up */
+.animated-element.fadeUp {
+  transform: translateY(30px);
+}
+
+.animated-element.fadeUp.visible {
+  transform: translateY(0);
+}
+
+/* Fade Down */
+.animated-element.fadeDown {
+  transform: translateY(-30px);
+}
+
+.animated-element.fadeDown.visible {
+  transform: translateY(0);
+}
+
+/* Fade In */
+.animated-element.fadeIn {
+  transform: none;
+}
+
+/* Fade Left */
+.animated-element.fadeLeft {
+  transform: translateX(30px);
+}
+
+.animated-element.fadeLeft.visible {
+  transform: translateX(0);
+}
+
+/* Fade Right */
+.animated-element.fadeRight {
+  transform: translateX(-30px);
+}
+
+.animated-element.fadeRight.visible {
+  transform: translateX(0);
+}
+
+/* Scale */
+.animated-element.scale {
+  transform: scale(0.8);
+}
+
+.animated-element.scale.visible {
+  transform: scale(1);
+}
+
+/* Blur */
+.animated-element.blur {
+  filter: blur(10px);
+}
+
+.animated-element.blur.visible {
+  filter: blur(0);
+}
+
+/* Combinado: Fade Up + Scale */
+.animated-element.fadeUpScale {
+  transform: translateY(30px) scale(0.95);
+}
+
+.animated-element.fadeUpScale.visible {
+  transform: translateY(0) scale(1);
+}

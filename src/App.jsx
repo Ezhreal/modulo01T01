@@ -1,0 +1,1036 @@
+import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { useAudioContext } from './contexts/AudioContext'
+import Accordion from './components/Accordion'
+import CardFlip from './components/CardFlip'
+import Tabs from './components/Tabs'
+import Carousel from './components/Carousel'
+import Header from './components/Header'
+import NumberCircle from './components/NumberCircle'
+import AnimatedElement from './components/AnimatedElement'
+import AnimatedText from './components/AnimatedText'
+import logoCapa from './assets/images/logo-capa-center.png'
+import fotoGailhac from './assets/images/foto-tela01.png'
+import iconeTela01 from './assets/images/img-icone-tela01.png'
+import starBlue from './assets/images/star-blue.png'
+import starYellow from './assets/images/start-yellow.png'
+import tela04Img01 from './assets/images/tela04-img01.png'
+import tela04Img02 from './assets/images/tela04-img02.png'
+import iconBirds from './assets/images/icon-birds-white.png'
+import iconBirdsBlue from './assets/images/icon-birds-blue.png'
+import iconTaca from './assets/images/icon-taca-white.png'
+import divisorYellow from './assets/images/divisor-yellow.png'
+import divisorBlue from './assets/images/divisor-blue.png'
+import tela06Img from './assets/images/tela06-img.png'
+import tela07Img from './assets/images/t07-img.png'
+import divBlueDir from './assets/images/divisor-blue-direita.png'
+import divBlueEsq from './assets/images/divisor-blue-esquerda.png'
+import tela09Img from './assets/images/tela08-img.png'
+import tela12Img from './assets/images/tela12-img.png'
+import tela13Img01 from './assets/images/tela13-img01.png'
+import tela13Img02 from './assets/images/tela13-img02.png'
+import flipCard01 from './assets/images/flip-card01.png'
+import flipCard02 from './assets/images/flip-card02.png'
+import flipCard03 from './assets/images/flip-card03.png'
+import flipCard04 from './assets/images/flip-card04.png'
+import flipCard05 from './assets/images/flip-card005.png'
+import tela14Slide01 from './assets/images/tela14-img-slide01.png'
+import tela14Slide02 from './assets/images/tela14-img-slide02.png'
+import tela16Img from './assets/images/tela16-img01.png'
+import Slide from './components/Slide'
+import CardsSlide from './components/CardsSlide'
+import './App.css'
+
+function App() {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const { playAudio } = useAudioContext()
+  const [currentTela, setCurrentTela] = useState(() => {
+    // Recupera a última tela do localStorage ou usa a primeira
+    const saved = localStorage.getItem('lastTela')
+    return saved ? parseInt(saved) : 1
+  })
+
+  // Sincroniza URL com a tela atual
+  useEffect(() => {
+    const telaFromUrl = searchParams.get('tela')
+    if (telaFromUrl) {
+      const telaNum = parseInt(telaFromUrl)
+      if (!isNaN(telaNum) && telaNum >= 1) {
+        setCurrentTela(telaNum)
+      }
+    }
+  }, [searchParams])
+
+  // Detecta mudança de scroll e atualiza a tela atual
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll('section[id^="tela"]')
+      const scrollPosition = window.scrollY + window.innerHeight / 2
+
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop
+        const sectionHeight = section.offsetHeight
+        const sectionId = section.id
+        const telaNum = parseInt(sectionId.replace('tela', ''))
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          if (currentTela !== telaNum) {
+            setCurrentTela(telaNum)
+            localStorage.setItem('lastTela', telaNum.toString())
+            setSearchParams({ tela: telaNum.toString() }, { replace: true })
+          }
+        }
+      })
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [currentTela, setSearchParams])
+
+  // Salva a tela atual no localStorage quando muda
+  useEffect(() => {
+    localStorage.setItem('lastTela', currentTela.toString())
+    setSearchParams({ tela: currentTela.toString() }, { replace: true })
+  }, [currentTela, setSearchParams])
+
+  // Toca o áudio quando muda de tela (apenas a partir da tela 2)
+  useEffect(() => {
+    if (currentTela >= 2) {
+      playAudio(currentTela)
+    }
+  }, [currentTela, playAudio])
+
+  return (
+    <div className="app">
+      {/* Background pattern - cobre todo o site */}
+      <div className="bg-pattern"></div>
+
+      {/* Header - só aparece a partir da tela 02 (primeira tela de conteúdo) */}
+      {currentTela >= 2 && <Header currentTela={currentTela} />}
+
+      {/* Tela 01 - Capa Principal */}
+      <section id="tela01" className="section tela-capa">
+        <div className="container-full tela-capa-container">
+          {/* Logo no topo */}
+          <AnimatedElement animation="fadeDown" delay={0.2} threshold={0}>
+            <div className="tela-capa-logo">
+              <img src={logoCapa} alt="Logo" />
+            </div>
+          </AnimatedElement>
+
+          {/* Módulo 01 - Tópico 01 */}
+          <AnimatedElement animation="fadeUp" delay={0.4} threshold={0}>
+            <div className="tela-capa-modulo font-inter-bold text-20 letter-spacing-20">
+              MÓDULO 01 - TÓPICO 01
+            </div>
+          </AnimatedElement>
+
+          {/* Título Principal */}
+          <h1 className="tela-capa-titulo font-garamond text-64 letter-spacing-20 text-shadow">
+            <AnimatedText animation="fadeUp" stagger={0.1} delay={0.6} threshold={0}>
+              O INÍCIO DA NOSSA<br />HISTÓRIA
+            </AnimatedText>
+          </h1>
+
+          {/* Scroll Indicator */}
+          <AnimatedElement animation="fadeUp" delay={1.2} threshold={0}>
+            <div className="tela-capa-scroll">
+              <div className="tela-capa-scroll-icon">
+                <svg width="24" height="40" viewBox="0 0 24 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="4" width="6" height="12" rx="3" stroke="var(--cor-azul)" strokeWidth="2" fill="none"/>
+                  <path d="M12 20L12 36" stroke="var(--cor-azul)" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M8 32L12 36L16 32" stroke="var(--cor-azul)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <p className="font-inter-bold text-24 letter-spacing-20 tela-capa-scroll-texto">ROLE PARA INICIAR</p>
+            </div>
+          </AnimatedElement>
+        </div>
+      </section>
+
+
+
+      {/* Tela 03 - Módulo 01 Tópico 01 */}
+      <section id="tela02" className="section tela-conteudo tela02">
+        
+        <div className="container tela02-container-border margin-vertical-60">
+           {/* Estrelas amarelas nas bordas horizontais */}
+            <img src={starYellow} alt="" className="star-yellow star-yellow-1" />
+            <img src={starYellow} alt="" className="star-yellow star-yellow-2" />
+            <img src={starYellow} alt="" className="star-yellow star-yellow-3" />
+            <img src={starYellow} alt="" className="star-yellow star-yellow-4" />
+          
+          {/* Estrelas azuis nas bordas verticais */}
+          <img src={starBlue} alt="" className="star-blue-left" />
+          <img src={starBlue} alt="" className="star-blue-right" />
+          {/* Parte superior - fundo creme */}
+          <div className="tela02-top">
+            <div className="tela02-top-content">
+              <div className="tela02-left flex-column-small">
+                <AnimatedElement animation="fadeUp" delay={0.1}>
+                  <NumberCircle number={1} />
+                </AnimatedElement>
+                <AnimatedElement animation="fadeUp" delay={0.2}>
+                  <h2 className="tela02-titulo font-inter-bold text-20 letter-spacing-20">
+                    Conhecendo a história de Gailhac
+                  </h2>
+                </AnimatedElement>
+                <AnimatedElement animation="fadeUp" delay={0.3}>
+                  <p className="tela02-texto font-garamond text-32">
+                    <AnimatedText animation="fadeIn" stagger={0.05} delay={0.3}>
+                      Conhecer a própria história é compreender o sentido do presente. Nesta jornada, organizada em quatro módulos, você será convidado a percorrer a trajetória de Pe. Gailhac, passando por momentos decisivos de sua vida
+                    </AnimatedText>
+                  </p>
+                </AnimatedElement>
+              </div>
+              <AnimatedElement animation="fadeLeft" delay={0.4}>
+                <div className="tela02-right">
+                  <img src={fotoGailhac} alt="Pe. Gailhac" className="tela02-foto" />
+                </div>
+              </AnimatedElement>
+            </div>
+          </div>
+
+          {/* Parte inferior - fundo azul */}
+          <div className="tela02-bottom">
+            <div className="tela02-bottom-content">
+              <AnimatedElement animation="fadeUp" delay={0.2}>
+                <div className="tela02-icon">
+                  <img src={iconeTela01} alt="Ícone" />
+                </div>
+              </AnimatedElement>
+              <AnimatedElement animation="fadeUp" delay={0.3}>
+                <div className="tela02-bottom-text">
+                  <p className="tela02-bottom-paragrafo font-inter-regular text-24">
+                    <AnimatedText animation="fadeIn" stagger={0.05} delay={0.3}>
+                      Neste primeiro módulo, voltamos o olhar para a infância, tempo de formação, descobertas e silenciosos chamados. Começamos a compreender também, como uma vida marcada por desafios e escolhas corajosas deu origem à missão que hoje conhecemos como Rede Sagrado.
+                    </AnimatedText>
+                  </p>
+                </div>
+              </AnimatedElement>
+            </div>
+          </div>
+        </div>
+      </section>
+
+            {/* Tela 02 - Tela Simples com Vídeo */}
+            <section id="tela03" className="section tela-conteudo tela-simples bg-video">
+        <div className="container">
+          <div className="tela-simples-content">
+            <AnimatedElement animation="fadeUp" delay={0.1}>
+              <div className="tela-simples-numero">
+                <NumberCircle number={2} />
+              </div>
+            </AnimatedElement>
+            <AnimatedElement animation="fadeUp" delay={0.2}>
+              <h2 className="tela-simples-titulo font-inter-bold text-20 letter-spacing-20">
+                Conhecendo a história de Gailhac
+              </h2>
+            </AnimatedElement>
+            <AnimatedElement animation="fadeUp" delay={0.3}>
+              <p className="tela-simples-texto font-garamond text-32">
+                <AnimatedText animation="fadeIn" stagger={0.05} delay={0.3}>
+                  Para iniciar essa caminhada, convido você a assistir ao vídeo que apresenta minha infância e os primeiros sinais da missão que começava a se desenhar.
+                </AnimatedText>
+              </p>
+            </AnimatedElement>
+            <AnimatedElement animation="fadeUp" delay={0.5}>
+              <div className="tela-simples-video">
+                <iframe
+                  width="100%"
+                  height="600"
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                  title="Vídeo"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </AnimatedElement>
+          </div>
+        </div>
+      </section>
+
+      {/* Tela 04 */}
+      <section id="tela04" className="section tela-conteudo tela04">
+        <div className="container">
+          <AnimatedElement animation="fadeDown" delay={0.1}>
+            <div className='icon-top'>
+              <img src={iconBirds} alt="" className="icon-birds" />
+            </div>
+          </AnimatedElement>
+          <div className="tela04-content">
+            <div className="tela04-coluna-esquerda flex-column">
+              <AnimatedElement animation="fadeUp" delay={0.2}>
+                <div className="tela04-numero">
+                  <NumberCircle number={3} color="var(--cor-amarelo-claro)" borderColor="var(--cor-amarelo-claro)" />
+                </div>
+              </AnimatedElement>
+              <AnimatedElement animation="fadeUp" delay={0.3}>
+                <h2 className="tela04-titulo font-inter-bold text-20 letter-spacing-20">
+                  Eu Gailhac (criança)
+                </h2>
+              </AnimatedElement>
+              <AnimatedElement animation="fadeUp" delay={0.4}>
+                <p className="tela04-texto font-garamond text-32">
+                  <AnimatedText animation="fadeIn" stagger={0.05} delay={0.4}>
+                    Como você deve ter percebido, venho de uma família simples, marcada pelo trabalho e pela fé vivida no cotidiano. Desde cedo aprendi que a vida não oferece atalhos e que a dignidade se constrói mesmo em meio às dificuldades.
+                  </AnimatedText>
+                </p>
+              </AnimatedElement>
+            </div>
+            <AnimatedElement animation="fadeRight" delay={0.5}>
+              <div className="tela04-coluna-direita">
+                <img src={tela04Img01} alt="" className="tela04-img01" />
+              </div>
+            </AnimatedElement>
+          </div>
+
+          <AnimatedElement animation="fadeIn" delay={0.3}>
+            <div className="divisor">
+              <img src={divisorYellow}/>
+            </div>
+          </AnimatedElement>
+          
+          
+          <div className="tela04-content">
+            <AnimatedElement animation="fadeLeft" delay={0.2}>
+              <div className="tela04-coluna-esquerda">
+                <img src={tela04Img02} alt="" className="tela04-img01" />
+              </div>
+            </AnimatedElement>
+            <div className="tela04-coluna-direita flex-column">
+              <AnimatedElement animation="fadeUp" delay={0.3}>
+                <div className="tela04-icon-taca">
+                  <img src={iconTaca} alt="" className="icon-taca" />
+                </div>
+              </AnimatedElement>
+              <AnimatedElement animation="fadeUp" delay={0.4}>
+                <p className="tela04-texto font-inter-regular text-24 text-end">
+                  <AnimatedText animation="fadeIn" stagger={0.05} delay={0.4}>
+                    Ainda criança, perdi meu pai. Essa perda marcou profundamente minha história. A dor me fez amadurecer antes do tempo e despertou em mim uma sensibilidade especial para com aqueles que sofrem. Foi minha mãe quem sustentou nossa casa e minha fé, ensinando-me que confiar em Deus não significa ausência de dor, mas coragem para atravessá-la.
+                  </AnimatedText>
+                </p>
+              </AnimatedElement>
+            </div>
+          </div>
+
+         
+        </div>
+      </section>
+
+      {/* Tela 05 */}
+      <section id="tela05" className="section tela-conteudo tela05">
+          <div className='tela13-hold-lines'>
+        <div className="container">
+         <div className='tela-simples-content no-padding tela05-container-border'>
+           {/* Estrelas amarelas nas bordas horizontais */}
+           <img src={starYellow} alt="" className="star-yellow star-yellow-1" />
+            <img src={starYellow} alt="" className="star-yellow star-yellow-2" />
+            <img src={starYellow} alt="" className="star-yellow star-yellow-3" />
+            <img src={starYellow} alt="" className="star-yellow star-yellow-4" />
+          
+          {/* Estrelas azuis nas bordas verticais */}
+          <img src={starYellow} alt="" className="star-yellow-left" />
+          <img src={starYellow} alt="" className="star-yellow-right" />
+         <AnimatedElement animation="fadeUp" delay={0.1}>
+          <div className="tela-simples-numero">
+            <NumberCircle number={4} color="var(--cor-amarelo-claro)" borderColor="var(--cor-amarelo-claro)" />
+          </div>
+         </AnimatedElement>
+              <AnimatedElement animation="fadeUp" delay={0.3}>
+                <div className="citacao">
+                  <p className="citacao-texto font-garamond text-42 text-shadow">
+                    <span className="citacao-aspas">"</span>
+                    <AnimatedText animation="fadeIn" stagger={0.08} delay={0.3}>
+                      Cresci próximo à igreja de Saint Aphrodise, um lugar decisivo para minha formação espiritual. Foi ali que conheci o Padre Jean-Jacques Martin, pároco da comunidade
+                    </AnimatedText>
+                  </p>
+                </div>
+              </AnimatedElement>
+              <AnimatedElement animation="fadeUp" delay={0.5}>
+                <div className="tela05-box-azul">
+                  <p className="tela05-box-texto font-inter-regular text-24">
+                    <AnimatedText animation="fadeIn" stagger={0.05} delay={0.5}>
+                      Ele havia sido perseguido durante a Revolução Francesa, vivera o exílio e retornara com uma fé firme e coerente. Tornou-se para mim um verdadeiro diretor espiritual. Com ele aprendi que a fé não se negocia, que a consciência precisa ser firme e que não devemos fugir das dificuldades.
+                    </AnimatedText>
+                  </p>
+                </div>
+              </AnimatedElement>
+              <AnimatedElement animation="fadeUp" delay={0.7}>
+                <div className='icon-bottom'>
+                  <img src={iconBirds} alt="" className="icon-birds" />
+                </div>
+              </AnimatedElement>
+         </div>
+        
+          </div>
+        </div>
+
+      </section>
+
+      {/* Tela 06 */}
+      <section id="tela06" className="section tela-conteudo tela06">
+        <div className="container-full">
+          <div className="tela06-content">
+            <div className="tela06-numero">
+              <NumberCircle number={5} />
+            </div>
+            <div className="tela06-imagem">
+              <img src={tela06Img} alt="" className="tela06-img" />
+            </div>
+            <div className="tela06-textos">
+              <div className="tela06-texto-esquerda">
+                <p className="tela06-texto font-garamond text-36">
+                Ainda menino, comecei a compreender algo que nunca mais me abandonaria: problemas não desaparecem quando fechamos os olhos. É preciso sabedoria e “espinha dorsal” para permanecer de pé em meio às tempestades.
+                </p>
+              </div>
+              <div className="tela06-texto-direita">
+                <p className="tela06-texto font-garamond text-36">
+                Fui ordenado sacerdote em 23 de setembro de 1826 e logo pedi ao bispo para servir onde a dor humana fosse mais visível. Assim, tornei-me capelão do hospital civil e militar de Béziers.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className='container'>
+        <div className="divisor">
+            <img src={divisorBlue}/>
+          </div>
+          
+        </div>
+      
+      </section>
+
+      {/* Tela 07 - Tela Simples com Vídeo */}
+      <section id="tela07" className="section tela-conteudo tela-simples bg-video">
+        <div className="container">
+          <div className="tela-simples-content">
+            <AnimatedElement animation="fadeUp" delay={0.1}>
+              <div className="tela-simples-numero">
+                <NumberCircle number={6} />
+              </div>
+            </AnimatedElement>
+            <AnimatedElement animation="fadeUp" delay={0.2}>
+              <h2 className="tela-simples-titulo font-inter-bold text-20 letter-spacing-20">
+                Eu, Gailhac (Jovem)
+              </h2>
+            </AnimatedElement>
+            <AnimatedElement animation="fadeUp" delay={0.3}>
+              <p className="tela-simples-texto font-garamond text-32">
+                <AnimatedText animation="fadeIn" stagger={0.05} delay={0.3}>
+                  Para continuarmos essa jornada, acompanhe o período da minha juventude, quando os aprendizados da infância se transformaram em escolhas, ações concretas e nos primeiros passos de uma missão que começava a ganhar forma.
+                </AnimatedText>
+              </p>
+            </AnimatedElement>
+            <AnimatedElement animation="fadeUp" delay={0.5}>
+              <div className="tela-simples-video">
+                <iframe
+                  width="100%"
+                  height="600"
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                  title="Vídeo"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </AnimatedElement>
+          </div>
+        </div>
+      </section>
+
+      {/* Tela 08 */}
+      <section id="tela08" className="section tela-conteudo tela08 bg-circle-yellow">
+        <div className="container-full">
+          <div className="tela08-content">
+            <AnimatedElement animation="fadeUp" delay={0.1}>
+              <div className="tela08-numero">
+                <NumberCircle number={7} />
+              </div>
+            </AnimatedElement>
+            <div className="tela08-tres-colunas">
+              <AnimatedElement animation="fadeLeft" delay={0.2}>
+                <div className="tela08-coluna-esquerda">
+                  <div>
+                    <p className="tela08-texto font-garamond text-36">
+                      <AnimatedText animation="fadeIn" stagger={0.05} delay={0.2}>
+                        Na juventude, compreendi que não bastava constatar os problemas do mundo. Era preciso agir. Nunca fui do tipo que esperou acontecer. Fiz acontecer. Jamais me contentei em ser apenas conduzido; assumi os riscos da liderança.
+                      </AnimatedText>
+                    </p>
+                    <div className='divisor'>
+                      <img src={divBlueEsq} alt="" className="divisor-esq" />
+                    </div>
+                  </div>
+                </div>
+              </AnimatedElement>
+              <AnimatedElement animation="fadeUp" delay={0.4}>
+                <div className="tela08-coluna-centro">
+                  <img src={tela07Img} alt="" className="tela08-img" />
+                </div>
+              </AnimatedElement>
+              <AnimatedElement animation="fadeRight" delay={0.3}>
+                <div className="tela08-coluna-direita">
+                  <div>
+                    <div className='divisor'>
+                      <img src={divBlueDir} alt="" className="divisor-dir" />
+                    </div>
+                    <p className="tela08-texto font-garamond text-36">
+                      <AnimatedText animation="fadeIn" stagger={0.05} delay={0.3}>
+                        Fui ordenado sacerdote em 23 de setembro de 1826 e logo pedi ao bispo para servir onde a dor humana fosse mais visível. Assim, tornei-me capelão do hospital civil e militar de Béziers.
+                      </AnimatedText>
+                    </p>
+                  </div>
+                </div>
+              </AnimatedElement>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* Tela 09 */}
+      <section id="tela09" className="section tela-conteudo tela09">
+        <div className="container">
+          <div className="tela09-content">
+            <AnimatedElement animation="fadeLeft" delay={0.2}>
+              <div className="tela09-coluna-imagem">
+                <img src={tela09Img} alt="" className="tela09-img" />
+              </div>
+            </AnimatedElement>
+            <div className="tela09-coluna-texto">
+              <AnimatedElement animation="fadeUp" delay={0.1}>
+                <div className="tela09-numero">
+                  <NumberCircle number={7} />
+                </div>
+              </AnimatedElement>
+              <AnimatedElement animation="fadeUp" delay={0.3}>
+                <p className="tela09-intro font-garamond text-36">
+                  <AnimatedText animation="fadeIn" stagger={0.05} delay={0.3}>
+                    Assim, começou a nascer minhas obras! Clique no recurso abaixo e conheça minhas duas primeiras obras:
+                  </AnimatedText>
+                </p>
+              </AnimatedElement>
+              <AnimatedElement animation="fadeUp" delay={0.5}>
+                <div className="tela09-accordions">
+                  <Accordion
+                    items={[
+                      {
+                        title: "1ª obra – O Hospital",
+                        content: (
+                          <div className="tela09-accordion-content">
+                            <p className="tela09-accordion-texto">
+                              <AnimatedText animation="fadeIn" stagger={0.05} delay={0}>
+                                No hospital, convivi diariamente com doentes, feridos, pobres e abandonados. Vi de perto como a miséria, a doença e a exclusão ferem não apenas o corpo, mas também a dignidade humana. Aquela realidade moldou profundamente meu coração pastoral. Compreendi que cuidar da alma exige tocar as feridas da vida concreta.
+                                <br /><br />
+                                Foi nesse contexto que passei a olhar com atenção especial para mulheres em situação extrema de vulnerabilidade. Muitas eram exploradas, doentes, sem apoio e sem alternativas. Não consegui ignorar aquilo.
+                              </AnimatedText>
+                            </p>
+                          </div>
+                        )
+                      },
+                      {
+                        title: "2ª obra – O Refúgio do Bom Pastor",
+                        content: (
+                          <div className="tela09-accordion-content">
+                            <p className="tela09-accordion-texto">
+                              <AnimatedText animation="fadeIn" stagger={0.05} delay={0}>
+                                O Refúgio não foi fruto de teoria, mas de urgência. Nunca me contentei em diagnosticar problemas; parti para a ação. Assumi riscos, enfrentei resistências e adotei como método o enfrentamento.
+                              </AnimatedText>
+                            </p>
+                          </div>
+                        )
+                      }
+                    ]}
+                  />
+                </div>
+              </AnimatedElement>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Tela 10 */}
+      <section id="tela10" className="section tela-conteudo tela10">
+        <div className='tela10-hold-lines'>
+        <div className="container">
+         <div className='tela-simples-content no-padding tela10-container-border'>
+           {/* Estrelas amarelas nas bordas horizontais */}
+           <img src={starYellow} alt="" className="star-yellow star-yellow-1" />
+            <img src={starYellow} alt="" className="star-yellow star-yellow-2" />
+            <img src={starYellow} alt="" className="star-yellow star-yellow-3" />
+            <img src={starYellow} alt="" className="star-yellow star-yellow-4" />
+          
+          {/* Estrelas azuis nas bordas verticais */}
+          <img src={starYellow} alt="" className="star-yellow-left" />
+          <img src={starYellow} alt="" className="star-yellow-right" />
+         <AnimatedElement animation="fadeUp" delay={0.1}>
+          <div className="tela-simples-numero">
+            <NumberCircle number={9} color="var(--cor-amarelo-claro)" borderColor="var(--cor-amarelo-claro)" />
+          </div>
+         </AnimatedElement>
+              <AnimatedElement animation="fadeUp" delay={0.2}>
+                <div className='tela10-texto-intro'>
+                  <p className="font-inter-regular text-24">
+                    <AnimatedText animation="fadeIn" stagger={0.05} delay={0.2}>
+                      As calúnias vieram cedo. Fofocas, preconceitos e mentiras tornaram-se pedras constantes em meu caminho. Muitas vezes minha vida foi ameaçada.
+                    </AnimatedText>
+                  </p>
+                </div>
+              </AnimatedElement>
+              <div className="citacao">
+              <p className="citacao-texto font-garamond text-42 text-shadow">
+                <span className="citacao-aspas">"</span>
+                Nessas horas, eu repetia:<br></br>Coragem, Deus é mais forte que os homens!”
+              </p>
+            </div>
+            <div className="tela10-box-azul">
+              <p className="tela10-box-texto font-inter-regular text-24">
+              O bispo Dom Thibault, tentando proteger-me, chamou-me um dia e disse:<br></br>
+                “Encontre uma congregação feminina que possa ficar à frente do Refúgio.”
+                Mais uma vez, abri-me à vontade de Deus.
+
+              </p>
+            </div>
+
+         </div>
+         <AnimatedElement animation="fadeUp" delay={0.8}>
+           <div className="tela10-footer">
+             <div className="tela10-footer-icon">
+               <img src={iconTaca} alt="" className="icon-taca" />
+             </div>
+             <p className="font-inter-regular text-24">
+               <AnimatedText animation="fadeIn" stagger={0.05} delay={0.8}>
+                 Siga para o próximo subtópico e acompanhe minha vida na maturidade, quando o tempo, a experiência e a fé revelam o sentido de tudo o que foi vivido.
+               </AnimatedText>
+             </p>
+           </div>
+         </AnimatedElement>
+          </div>
+        </div>
+      </section>
+
+      {/* Tela 11 - Tela Simples com Vídeo */}
+      <section id="tela11" className="section tela-conteudo tela-simples bg-video">
+        <div className="container">
+          <div className="tela-simples-content">
+            <AnimatedElement animation="fadeUp" delay={0.1}>
+              <div className="tela-simples-numero">
+                <NumberCircle number={11} />
+              </div>
+            </AnimatedElement>
+            <AnimatedElement animation="fadeUp" delay={0.2}>
+              <h2 className="tela-simples-titulo font-inter-bold text-20 letter-spacing-20">
+                Eu, Gailhac (idoso)
+              </h2>
+            </AnimatedElement>
+            <AnimatedElement animation="fadeUp" delay={0.3}>
+              <p className="tela-simples-texto font-garamond text-32">
+                <AnimatedText animation="fadeIn" stagger={0.05} delay={0.3}>
+                  Para iniciar essa caminhada, convido você a assistir ao vídeo que apresenta minha infância e os primeiros sinais da missão que começava a se desenhar.
+                </AnimatedText>
+              </p>
+            </AnimatedElement>
+            <AnimatedElement animation="fadeUp" delay={0.5}>
+              <div className="tela-simples-video">
+                <iframe
+                  width="100%"
+                  height="600"
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                  title="Vídeo"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </AnimatedElement>
+          </div>
+        </div>
+      </section>
+
+      {/* Tela 12 */}
+      <section id="tela12" className="section tela-conteudo tela12">
+        <div className="container-full tela12-container-full">
+          <AnimatedElement animation="fadeUp" delay={0.1}>
+            <div className="tela12-numero">
+              <NumberCircle number={12} color="var(--cor-amarelo-claro)" borderColor="var(--cor-amarelo-claro)" />
+            </div>
+          </AnimatedElement>
+          <div className="tela12-tres-colunas">
+            <AnimatedElement animation="fadeLeft" delay={0.2}>
+              <div className="tela12-coluna tela12-coluna-primeira">
+                <p className="tela12-texto font-garamond text-36">
+                  <AnimatedText animation="fadeIn" stagger={0.05} delay={0.2}>
+                    A falta de continuidade prejudicava profundamente o trabalho com aquelas mulheres e meninas. Aos poucos, comecei a entender: todos aqueles obstáculos eram, na verdade, a semente de algo maior.
+                  </AnimatedText>
+                </p>
+              </div>
+            </AnimatedElement>
+            <AnimatedElement animation="fadeUp" delay={0.3}>
+              <div className="tela12-coluna tela12-coluna-meio">
+                <p className="tela12-texto font-garamond text-36">
+                  <AnimatedText animation="fadeIn" stagger={0.05} delay={0.3}>
+                    As primeiras tentativas foram difíceis. As Dames de Saint Maur assumiram o Refúgio por dois anos. Foram tempos turbulentos. Eu queria uma coisa, elas outra. Sentia que o projeto inicial estava sendo descaracterizado.
+                  </AnimatedText>
+                </p>
+              </div>
+            </AnimatedElement>
+            <AnimatedElement animation="fadeRight" delay={0.4}>
+              <div className="tela12-coluna tela12-coluna-terceira">
+                <p className="tela12-texto font-garamond text-36">
+                  <AnimatedText animation="fadeIn" stagger={0.05} delay={0.4}>
+                    As primeiras tentativas foram difíceis. As Dames de Saint Maur assumiram o Refúgio por dois anos. Foram tempos turbulentos. Eu queria uma coisa, elas outra. Sentia que o projeto inicial estava sendo descaracterizado.
+                  </AnimatedText>
+                </p>
+              </div>
+            </AnimatedElement>
+          </div>
+          <AnimatedElement animation="fadeUp" delay={0.5}>
+            <div className="tela12-imagem bg-circle-blue">
+              <img src={tela12Img} alt="" className="tela12-img" />
+            </div>
+          </AnimatedElement>
+        </div>
+        <div className="container">
+          <AnimatedElement animation="fadeIn" delay={0.3}>
+            <div className="divisor">
+              <img src={divisorYellow} alt="" />
+            </div>
+          </AnimatedElement>
+          
+          <AnimatedElement animation="fadeUp" delay={0.6}>
+            <div className="tela12-bg-title">
+              <p className="tela12-titulo-1 font-garamond text-32">
+                <AnimatedText animation="fadeIn" stagger={0.05} delay={0.6}>
+                  Assim, dei início a minha minha semente maior, a 3ª obra!
+                </AnimatedText>
+              </p>
+              <p className="tela12-titulo-2 font-garamond text-64">
+                <AnimatedText animation="fadeIn" stagger={0.05} delay={0.7}>
+                  A Congregação do Sagrado Coração de Maria.
+                </AnimatedText>
+              </p>
+            </div>
+          </AnimatedElement>
+
+          <AnimatedElement animation="fadeUp" delay={0.8}>
+            <p className="tela12-texto-longo font-inter-regular text-24">
+              <AnimatedText animation="fadeIn" stagger={0.05} delay={0.8}>
+                Percebi que a obra é maior do que as pessoas. Entre minhas colaboradoras, algumas já caminhavam afinadas com meu ideal: Rosa Jeannet, Cecília Cambon, Eulália Vidal, Rosália Gibbal e Maria Roques. Rezávamos, convivíamos e esperávamos a hora de Deus.
+              </AnimatedText>
+            </p>
+          </AnimatedElement>
+
+          <AnimatedElement animation="fadeIn" delay={0.3}>
+            <div className="divisor">
+              <img src={divisorYellow} alt="" />
+            </div>
+          </AnimatedElement>
+        </div>
+      </section>
+
+      {/* Tela 13 */}
+      <section id="tela13" className="section tela-conteudo tela13">
+        <div className="container-full tela13-inner">
+          {/* Conteúdo principal da tela 13 */}
+          <div className="container-full tela13-conteudo">
+            <AnimatedElement animation="fadeDown" delay={0.1}>
+              <div className='icon-top'>
+                <img src={iconBirdsBlue} alt="" className="icon-birds-blue" />
+              </div>
+            </AnimatedElement>
+            
+            {/* Imagem com margin negativa */}
+            <AnimatedElement animation="fadeUp" delay={0.2}>
+              <div className="tela13-imagem-1">
+                <img src={tela13Img01} alt="" className="tela13-img-1" />
+              </div>
+            </AnimatedElement>
+            
+            {/* Duas colunas de texto */}
+            <div className="tela13-textos-duas-colunas">
+              <AnimatedElement animation="fadeLeft" delay={0.3}>
+                <div className="tela13-texto-esquerda">
+                  <p className="tela13-texto font-garamond text-36">
+                    <AnimatedText animation="fadeIn" stagger={0.05} delay={0.3}>
+                    Foi então que ocorreu a morte repentina de meu amigo e benfeitor Eugène Cure. Sua esposa, Apolônia, também grande colaboradora do Refúgio, decidiu consagrar-se a Deus e transferir seus bens para minhas obras. No início, resisti. Temi que fosse uma decisão tomada na dor. Sugeri que pensasse melhor. Mas Apolônia era firme. Aquilo já havia sido combinado entre ela e o marido.
+                    </AnimatedText>
+                  </p>
+                </div>
+              </AnimatedElement>
+              <AnimatedElement animation="fadeRight" delay={0.4}>
+                <div className="tela13-texto-direita">
+                  <p className="tela13-texto font-garamond text-36">
+                    <AnimatedText animation="fadeIn" stagger={0.05} delay={0.4}>
+                    Vieram novas calúnias. Diziam que eu me aproveitava da fragilidade de uma viúva rica. Seus parentes moveram contra mim uma ação judicial. Fui levado aos tribunais. Mantive o silêncio. A sentença foi clara: fui absolvido. Mesmo assim, doeu. A fofoca é um mal traiçoeiro, anônimo e cruel.
+                    </AnimatedText>
+                  </p>
+                </div>
+              </AnimatedElement>
+            </div>
+            
+            {/* Box azul com ícone taça + texto */}
+            <div className='container'>
+              <AnimatedElement animation="fadeUp" delay={0.5}>
+                <div className="tela13-box-taca">
+                  <div className="tela13-box-taca-icon">
+                    <img src={iconTaca} alt="" className="icon-taca" />
+                  </div>
+                  <p className="tela13-box-taca-texto font-inter-regular text-24">
+                    <AnimatedText animation="fadeIn" stagger={0.05} delay={0.5}>
+                    Fundada a Congregação em 24 de fevereiro de 1849, novos desafios surgiram. A transição no Refúgio foi tensa. Houve resistência, conflitos e até intervenção policial. Minhas filhas espirituais viveram ali um verdadeiro “batismo de fogo”.
+                    </AnimatedText>
+                  </p>
+                </div>
+              </AnimatedElement>
+            </div>
+
+            
+            {/* Repete as colunas de textos */}
+            <div className="tela13-textos-duas-colunas">
+              <AnimatedElement animation="fadeLeft" delay={0.6}>
+                <div className="tela13-texto-esquerda">
+                  <p className="tela13-texto font-garamond text-36">
+                    <AnimatedText animation="fadeIn" stagger={0.05} delay={0.6}>
+                    Pedi demissão do hospital. Nunca fiz nada pela metade. As irmãs precisavam de minha presença e orientação.
+                    </AnimatedText>
+                  </p>
+                </div>
+              </AnimatedElement>
+              <AnimatedElement animation="fadeRight" delay={0.7}>
+                <div className="tela13-texto-direita">
+                  <p className="tela13-texto font-garamond text-36">
+                    <AnimatedText animation="fadeIn" stagger={0.05} delay={0.7}>
+                    Inspirado no Bom Pastor, compreendi que não bastava acolher quem já havia caído. Era preciso prevenir.
+                    </AnimatedText>
+                  </p>
+                </div>
+              </AnimatedElement>
+            </div>
+            
+            {/* Outra imagem com margin-bottom negativa */}
+            <AnimatedElement animation="fadeUp" delay={0.8}>
+              <div className="tela13-imagem-2">
+                <img src={tela13Img02} alt="" className="tela13-img-2" />
+              </div>
+            </AnimatedElement>
+            
+            <AnimatedElement animation="fadeUp" delay={0.9}>
+              <div className='icon-bottom'>
+                <img src={iconBirdsBlue} alt="" className="icon-birds-blue" />
+              </div>
+            </AnimatedElement>
+          </div>
+        </div>
+      </section>
+
+      {/* Tela 14 */}
+      <section id="tela14" className="section tela-conteudo tela14">
+        <div className="container">
+          <div className="tela14-content">
+            <AnimatedElement animation="fadeUp" delay={0.1}>
+              <div className="tela14-numero">
+                <NumberCircle number={14} color="var(--cor-amarelo-claro)" borderColor="var(--cor-amarelo-claro)" />
+              </div>
+            </AnimatedElement>
+            <AnimatedElement animation="fadeUp" delay={0.2}>
+              <p className="tela14-intro font-garamond text-36">
+                <AnimatedText animation="fadeIn" stagger={0.05} delay={0.2}>
+                  Assim nasceram outras obras, fruto do amadurecimento da missão! <br /> Clique nos cards a seguir para conhecê-las:
+                </AnimatedText>
+              </p>
+            </AnimatedElement>
+            
+            <AnimatedElement animation="fadeUp" delay={0.4}>
+              <CardsSlide
+                cards={[
+                  {
+                    front: <img src={flipCard01} alt="" className="tela14-card-img" />,
+                    back: (
+                      <p className="tela14-card-texto font-inter-regular text-20">
+                        A 4ª obra – A Preservação, voltada a impedir que jovens vulneráveis caíssem no caminho da prostituição, oferecendo-lhes alternativas antes que a exclusão se instalasse.
+                      </p>
+                    )
+                  },
+                  {
+                    front: <img src={flipCard02} alt="" className="tela14-card-img" />,
+                    back: (
+                      <p className="tela14-card-texto font-inter-regular text-20">
+                        A 5ª obra – As Irmãs da Virgem, formada por leigas consagradas que, tendo sido acolhidas, desejaram permanecer conosco em serviço e espiritualidade.
+                      </p>
+                    )
+                  },
+                  {
+                    front: <img src={flipCard03} alt="" className="tela14-card-img" />,
+                    back: (
+                      <p className="tela14-card-texto font-inter-regular text-20">
+                        A 6ª obra – O Internato Sagrado Coração de Maria, fundado em 1851, unindo excelência acadêmica e formação cristã, educando jovens — inclusive das famílias abastadas — e garantindo sustentabilidade às demais obras.
+                      </p>
+                    )
+                  },
+                  {
+                    front: <img src={flipCard04} alt="" className="tela14-card-img" />,
+                    back: (
+                      <p className="tela14-card-texto font-inter-regular text-20">
+                        A 7ª obra – A Congregação do Bom Pastor da Virgem, os Padres do Bom Pastor, dedicados à pregação, às missões, à catequese e à educação dos pobres.
+                      </p>
+                    )
+                  },
+                  {
+                    front: <img src={flipCard05} alt="" className="tela14-card-img" />,
+                    back: (
+                      <p className="tela14-card-texto font-inter-regular text-20">
+                        E a 8ª obra – A Colônia Agrícola, voltada à formação religiosa e profissional no meio rural, unindo fé, trabalho e dignidade.
+                      </p>
+                    )
+                  }
+                ]}
+              />
+            </AnimatedElement>
+          </div>
+        </div>
+      </section>
+
+      {/* Tela 15 */}
+      <section id="tela15" className="section tela-conteudo tela15">
+        <div className="container">
+          <div className="tela15-content">
+            <AnimatedElement animation="fadeUp" delay={0.1}>
+              <div className="tela15-numero">
+                <NumberCircle number={15} color="var(--cor-amarelo-claro)" borderColor="var(--cor-amarelo-claro)" />
+              </div>
+            </AnimatedElement>
+            <AnimatedElement animation="fadeUp" delay={0.2}>
+              <p className="tela15-texto font-garamond text-36">
+                <AnimatedText animation="fadeIn" stagger={0.05} delay={0.2}>
+                  Vieram ainda novas acusações, inclusive de assassinato. Mais uma vez, a justiça revelou a verdade. Permaneci firme. Aprendi que a fé é como o aço: o fogo a torna mais forte.
+                </AnimatedText>
+              </p>
+            </AnimatedElement>
+            
+            <AnimatedElement animation="fadeUp" delay={0.4}>
+              <div className="tela15-slide">
+                <Slide
+                  slides={[
+                    {
+                      image: tela14Slide01,
+                      text: 'Nos últimos anos, a visão enfraqueceu, o corpo cansou. Fui cuidado com ternura pelas irmãs, especialmente Irmã São-Félix. Celebrei minha última Eucaristia em 13 de novembro de 1889. Em 25 de janeiro de 1890, às três horas da tarde, após curta agonia, finalmente, minha vela se apagou.'
+                    },
+                    {
+                      image: tela14Slide02,
+                      text: 'Foi uma vida bem vivida. Com coragem, com a cabeça erguida e o sono dos justos. Fico muito emocionado de saber que valeu a pena, que meu exemplo não foi vão. O céu começa a ser vivido ainda na Terra. E não vem de graça. Nós é que o fazemos. Creio ter feito o meu.'
+                    }
+                  ]}
+                />
+              </div>
+            </AnimatedElement>
+            
+            <AnimatedElement animation="fadeUp" delay={0.6}>
+              <p className="tela15-texto-final font-garamond text-36">
+                <AnimatedText animation="fadeIn" stagger={0.05} delay={0.6}>
+                  Estou sempre com vocês. Todos os dias. Recebam meu abraço, meus amigos e minhas amigas, construtores de pontes novas... Eu, Gailhac!
+                </AnimatedText>
+              </p>
+            </AnimatedElement>
+          </div>
+        </div>
+      </section>
+
+      {/* Tela 16 - Igual à tela 08 */}
+      <section id="tela16" className="section tela-conteudo tela16 bg-circle-yellow">
+        <div className="container-full">
+          <div className="tela16-content">
+            <AnimatedElement animation="fadeUp" delay={0.1}>
+              <div className="tela16-numero">
+                <NumberCircle number={16} />
+              </div>
+            </AnimatedElement>
+            <div className="tela16-tres-colunas">
+              <AnimatedElement animation="fadeLeft" delay={0.2}>
+                <div className="tela16-coluna-esquerda">
+                  <div>
+                    <p className="tela16-texto font-garamond text-36">
+                      <AnimatedText animation="fadeIn" stagger={0.05} delay={0.2}>
+                        Minha vida não foi isenta de dores, incompreensões e injustiças. Mas foi uma vida vivida com coragem, fidelidade e amor. Aprendi que o céu começa a ser construído aqui, na Terra, quando escolhemos agir, servir e permanecer firmes, mesmo quando tudo parece desabar.
+                      </AnimatedText>
+                    </p>
+                    <div className='divisor'>
+                      <img src={divBlueEsq} alt="" className="divisor-esq" />
+                    </div>
+                  </div>
+                </div>
+              </AnimatedElement>
+              <AnimatedElement animation="fadeUp" delay={0.4}>
+                <div className="tela16-coluna-centro">
+                  <img src={tela16Img} alt="" className="tela16-img" />
+                </div>
+              </AnimatedElement>
+              <AnimatedElement animation="fadeRight" delay={0.3}>
+                <div className="tela16-coluna-direita">
+                  <div>
+                    <div className='divisor'>
+                      <img src={divBlueDir} alt="" className="divisor-dir" />
+                    </div>
+                    <p className="tela16-texto font-garamond text-36">
+                      <AnimatedText animation="fadeIn" stagger={0.05} delay={0.3}>
+                        Nada fiz sozinho. Tudo foi construído em parceria, oração e entrega.
+                      </AnimatedText>
+                    </p>
+                  </div>
+                </div>
+              </AnimatedElement>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* Tela 17 - Igual à tela 12 */}
+      <section id="tela17" className="section tela-conteudo tela17">
+     
+        <div className="container">
+          <AnimatedElement animation="fadeIn" delay={0.1}>
+            <div className="divisor">
+              <img src={divisorYellow} alt="" />
+            </div>
+          </AnimatedElement>
+          <AnimatedElement animation="fadeUp" delay={0.2}>
+            <div className="tela17-numero">
+              <NumberCircle number={17} color="var(--cor-amarelo-claro)" borderColor="var(--cor-amarelo-claro)" />
+            </div>
+          </AnimatedElement>
+          <AnimatedElement animation="fadeUp" delay={0.3}>
+            <div className="tela17-bg-title">
+              <p className="tela17-titulo-1 font-garamond text-32">
+                <AnimatedText animation="fadeIn" stagger={0.05} delay={0.3}>
+                  Minha história não termina aqui
+                </AnimatedText>
+              </p>
+              <p className="tela17-titulo-2 font-garamond text-48">
+                <AnimatedText animation="fadeIn" stagger={0.05} delay={0.4}>
+                  Ao meu lado, esteve uma mulher decisiva, cuja coragem, fidelidade e entrega marcaram profundamente essa missão.
+                </AnimatedText>
+              </p>
+            </div>
+          </AnimatedElement>
+
+          <AnimatedElement animation="fadeUp" delay={0.5}>
+            <p className="tela17-texto-longo font-inter-regular text-24">
+              <AnimatedText animation="fadeIn" stagger={0.05} delay={0.5}>
+                No próximo tópico, você conhecerá a história da Irmã Saint Jean, mulher de fé e protagonista silenciosa dessa caminhada.
+              </AnimatedText>
+            </p>
+          </AnimatedElement>
+
+          <AnimatedElement animation="fadeIn" delay={0.1}>
+            <div className="divisor">
+              <img src={divisorYellow} alt="" />
+            </div>
+          </AnimatedElement>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+export default App
