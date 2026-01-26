@@ -70,6 +70,9 @@
   cursor: pointer;
   color: var(--cor-amarelo-claro);
   transition: all 0.3s ease;
+  pointer-events: auto;
+  position: relative;
+  z-index: 1003;
 }
 
 .menu-close:hover {
@@ -103,6 +106,9 @@
   color: var(--cor-amarelo-claro);
   font-family: var(--fonte-inter);
   font-size: 14px;
+  pointer-events: auto;
+  position: relative;
+  z-index: 1003;
 }
 
 .menu-link:hover {
