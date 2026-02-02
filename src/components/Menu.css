@@ -51,7 +51,7 @@
 
 .menu-title {
   color: var(--cor-amarelo-claro);
-  font-family: var(--fonte-garamond);
+  font-family: var(--fonte-inter);
   font-weight: 700;
   font-size: 32px;
   margin: 0;
@@ -121,7 +121,7 @@
 }
 
 .menu-link-numero {
-  font-family: var(--fonte-infant);
+  font-family: var(--fonte-inter);
   font-weight: 700;
   font-size: 16px;
   min-width: 40px;

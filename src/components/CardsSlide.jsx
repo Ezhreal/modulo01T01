@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import CardFlip from './CardFlip'
 import Slide from './Slide'
 import './CardsSlide.css'
 
-const CardsSlide = ({ cards }) => {
+const CardsSlide = React.forwardRef(({ cards }, ref) => {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -76,6 +76,8 @@ const CardsSlide = ({ cards }) => {
       </div>
     </div>
   )
-}
+})
+
+CardsSlide.displayName = 'CardsSlide'
 
 export default CardsSlide

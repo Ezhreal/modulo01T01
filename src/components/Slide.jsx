@@ -23,7 +23,14 @@ const Slide = ({ slides = [] }) => {
           <img src={currentSlide.image} alt={currentSlide.alt || ''} />
         </div>
         <div className="slide-texto">
-          <p className="slide-texto-paragrafo font-inter-regular text-20">{currentSlide.text}</p>
+          <p
+            className="slide-texto-paragrafo font-inter-regular text-20"
+            {...(typeof currentSlide.text === 'string'
+              ? { dangerouslySetInnerHTML: { __html: currentSlide.text } }
+              : {})}
+          >
+            {typeof currentSlide.text !== 'string' ? currentSlide.text : null}
+          </p>
         </div>
       </div>
 

@@ -19,11 +19,11 @@ html {
   --cor-azul-escuro: #184E9D;
   --cor-amarelo-bg: #FEF1D0;
 
-  /* Fontes */
+  /* Fontes - todas Inter */
   --fonte-inter: 'Inter', sans-serif;
-  --fonte-garamond: 'Cormorant Garamond', serif;
-  --fonte-infant: 'Cormorant Infant', serif;
-  --fonte-barlow: 'Barlow Condensed', sans-serif;
+  --fonte-garamond: 'Inter', sans-serif;
+  --fonte-infant: 'Inter', sans-serif;
+  --fonte-barlow: 'Inter', sans-serif;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -46,13 +46,14 @@ html {
   font-weight: 700;
 }
 
+
 .font-garamond {
-  font-family: var(--fonte-garamond);
-  font-weight: 700; /* Sempre bold */
+  font-family: var(--fonte-inter);
+  font-weight: 400; /* Sempre bold */
 }
 
 .font-barlow {
-  font-family: var(--fonte-barlow);
+  font-family: var(--fonte-inter);
 }
 
 /* Tamanhos de fonte */
@@ -174,6 +175,15 @@ html {
 
 
 }
+}
+
+/* Alinhamento e cor de texto */
+.text-center {
+  text-align: center;
+}
+
+.text-white {
+  color: white;
 }
 
 /* Letter spacing 20% */

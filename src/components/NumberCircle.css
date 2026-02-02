@@ -11,7 +11,7 @@
 }
 
 .number-circle-text {
-  font-family: var(--fonte-infant);
+  font-family: var(--fonte-inter);
   font-weight: 700;
   font-size: 40px;
   color: var(--circle-color);

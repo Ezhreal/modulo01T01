@@ -144,12 +144,86 @@
   margin-top: 2rem;
 }
 
-.tela-simples-video iframe {
+.tela-simples-video iframe,
+.tela-simples-video video {
   width: 100%;
   height: 720px;
   border: none;
   border-radius: 8px;
+  display: block;
 }
+
+/* Tela 07 - Slideshow de vídeos jovem (estilo do Slide: ver anterior / ver próximo) */
+.tela07-video-slideshow {
+  width: 100%;
+}
+
+.tela07-video-slideshow .tela-simples-video {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Botões visíveis na tela 07 (fundo claro): azul em vez de amarelo */
+.tela07-video-slideshow .slide-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding: 0 1rem;
+}
+
+.tela07-video-slideshow .slide-button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--cor-azul);
+  font-family: var(--fonte-inter);
+  font-size: 24px;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+
+.tela07-video-slideshow .slide-button:hover {
+  opacity: 0.8;
+}
+
+.tela07-video-slideshow .slide-button-icon {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--cor-azul);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tela07-video-slideshow .slide-button-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--cor-azul);
+}
+
+.tela07-video-slideshow .slide-button-prev {
+  flex-direction: row;
+}
+
+.tela07-video-slideshow .slide-button-next {
+  flex-direction: row-reverse;
+}
+
+.tela07-obras-texto {
+  color: var(--cor-azul);
+  text-align: center;
+  margin: 2rem 1rem;
+  padding: 0;
+  line-height: 1.4;
+}
+
 /* Tela 03 (antiga Tela 02) */
 .tela02 {
   display: block;
@@ -300,7 +374,7 @@
   margin: 0;
 }
 
-.tela02-texto {
+.tela02-texto,.tela-simples-play {
   color: var(--cor-azul);
   line-height: 1.4;
   margin: 0;
@@ -449,11 +523,16 @@
   background-image: url(/src/assets/images/bg-citacao.png);
   background-position: bottom;
   background-repeat: no-repeat;
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: center; */
   padding: 6rem 2rem;
   margin-bottom: -2em;
+}
+
+/* Tela 05: citação sem background e com menos padding */
+.tela05 .citacao.citacao-tela05 {
+  background-image: none;
+  padding: 2rem;
+  margin-bottom: 0;
+  min-height: auto;
 }
 .citacao-texto {
   color: white;
@@ -464,13 +543,31 @@
 }
 
 .citacao-texto .citacao-aspas {
-  font-family: var(--fonte-garamond);
+  font-family: var(--fonte-inter);
   font-weight: 700;
   font-style: italic;
   text-align: center;
   display: block;
   font-size: 250px;
   line-height: 0.3;
+}
+
+.tela05-slides {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+  width: 100%;
+}
+
+.tela05-slide-img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  flex: 1 1 280px;
+  max-width: 400px;
 }
 
 .tela05-box-azul {
@@ -480,7 +577,20 @@
   padding: 2rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 2rem;
+}
+
+.tela05-box-azul .tela05-box-img {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  object-fit: contain;
+}
+
+.tela05-box-azul .tela05-box-texto {
+  flex: 1;
+  text-align: left;
 }
 
 .tela05 {
@@ -508,7 +618,6 @@
 
 .tela05-box-texto {
   color: white;
-  text-align: center;
   line-height: 1.4;
   margin: 0;
 }
@@ -615,7 +724,7 @@ text-align: right;
 }
 
 .tela06-texto {
-  font-family: var(--fonte-garamond);
+  font-family: var(--fonte-inter);
   font-weight: 700;
   font-style: italic;
   color: var(--cor-azul);
@@ -626,6 +735,28 @@ text-align: right;
 
 .tela06-texto-direita {
   text-align: right;
+}
+
+.tela06-proximo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 2rem 0 0;
+  padding: 0 1rem;
+}
+
+.tela06-proximo-icon {
+  flex-shrink: 0;
+  width: auto;
+  max-height: 150px;
+  object-fit: contain;
+}
+
+.tela06-proximo-texto {
+  color: var(--cor-azul);
+  text-align: left;
+  margin: 0;
+  flex: 1;
 }
 
 /* Tela 08 */
@@ -687,7 +818,7 @@ text-align: right;
 }
 
 .tela08-texto {
-  font-family: var(--fonte-garamond);
+  font-family: var(--fonte-inter);
   font-weight: 700;
   font-style: italic;
   font-size: 36px;
@@ -766,7 +897,7 @@ text-align: right;
   background: #184E9D;
   color: #FEF1D0;
   padding: 1.5rem;
-  font-family: var(--fonte-garamond);
+  font-family: var(--fonte-inter);
   font-weight: 700;
   font-size: 36px;
   border: none;
@@ -921,6 +1052,41 @@ text-align: right;
   margin: 0;
 }
 
+/* Tela 10 - Slides (igual tela05) */
+.tela10-slides {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+  width: 100%;
+}
+
+.tela10-slide-img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  flex: 1 1 280px;
+  max-width: 400px;
+}
+
+/* Tela 10 - Citação sem background, sem aspas, texto menor */
+.tela10 .citacao.citacao-tela10 {
+  background-image: none;
+  padding: 1rem 0;
+  margin-bottom: 0;
+  min-height: auto;
+}
+
+.citacao-texto-tela10 {
+  color: white;
+  text-align: center;
+  line-height: 1.4;
+  margin: 0;
+  font-style: italic;
+}
+
 /* Tela 12 */
 .tela12 {
   background-color: var(--cor-azul);
@@ -972,7 +1138,7 @@ text-align: right;
 }
 
 .tela12-texto {
-  font-family: var(--fonte-garamond);
+  font-family: var(--fonte-inter);
   font-weight: 700;
   font-size: 36px;
   color: var(--cor-amarelo-claro);
@@ -1239,7 +1405,7 @@ text-align: right;
 }
 
 .tela13-texto {
-  font-family: var(--fonte-garamond);
+  font-family: var(--fonte-inter);
   font-weight: 700;
   font-style: italic;
   font-size: 36px;
@@ -1294,7 +1460,7 @@ text-align: right;
 }
 
 .tela13-texto-solto {
-  font-family: var(--fonte-garamond);
+  font-family: var(--fonte-inter);
   font-weight: 700;
   font-style: italic;
   font-size: 36px;
@@ -1521,7 +1687,7 @@ text-align: right;
 }
 
 .tela16-texto {
-  font-family: var(--fonte-garamond);
+  font-family: var(--fonte-inter);
   font-weight: 700;
   font-style: italic;
   font-size: 36px;
@@ -1581,7 +1747,7 @@ text-align: right;
 }
 
 .tela17-texto {
-  font-family: var(--fonte-garamond);
+  font-family: var(--fonte-inter);
   font-weight: 700;
   font-size: 36px;
   color: var(--cor-amarelo-claro);
@@ -1622,11 +1788,12 @@ text-align: right;
 }
 
 .tela17-titulo-1 {
-  color: var(--cor-amarelo-claro);
+  color: white;
   font-weight: 700;
   font-size: 32px;
   text-align: center;
   line-height: 1.4;
+  letter-spacing: 0.2em;
 }
 
 .tela17-titulo-2 {
@@ -1638,11 +1805,83 @@ text-align: right;
   line-height: 1.4;
 }
 
+.tela17-textos-cta {
+  width: 100%;
+  padding: 0 1rem 0;
+  margin-bottom: 2rem;
+}
+
+.tela17-textos-cta .tela17-texto-longo:first-of-type {
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+}
+
+.tela17-textos-cta .tela17-texto-longo:last-of-type {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 2rem;
+}
+
+/* Divisor após os textos CTA: mais espaço para sensação de conteúdo bem dividido */
+.tela17-divisor {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+.tela17-divisor img {
+  display: block;
+  width: 100%;
+}
+
 .tela17-texto-longo {
   color: white;
   line-height: 1.4;
   margin: 2rem 0;
+  text-align: center;
+}
+
+.tela17-texto-longo strong {
+  font-weight: 700;
+  color: white;
+}
+
+/* Tela 17 - Referências (duas colunas, após o divisor) */
+.tela17-referencias {
+  margin-top: 3rem;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+.tela17-referencias-titulo {
+  color: var(--cor-amarelo-claro);
+  text-align: center;
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+}
+
+.tela17-referencias-colunas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem 3rem;
+  max-width: 100%;
+}
+
+.tela17-referencias-coluna {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tela17-ref {
+  color: white;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
   text-align: left;
+}
+
+.tela17-ref em {
+  font-style: italic;
 }
 
 /* Responsivo */
@@ -1730,8 +1969,13 @@ text-align: right;
     box-sizing: border-box;
   }
 
-  .tela-simples-video iframe {
+  .tela-simples-video iframe,
+  .tela-simples-video video {
     height: 480px;
+  }
+
+  .tela07-obras-texto {
+    margin: 1.5rem 0.5rem;
   }
 
   .tela02-top-content {
@@ -1876,6 +2120,14 @@ text-align: right;
     transform: none;
   }
 
+  .tela05-box-azul {
+    flex-direction: column;
+  }
+
+  .tela05-box-azul .tela05-box-img {
+    max-width: 100%;
+  }
+
   /* Tela 10 - Mobile: Ajustes de linhas transversais */
   .tela10-hold-lines::before,
   .tela10-hold-lines::after {
@@ -1931,6 +2183,10 @@ text-align: right;
   flex-direction: column;
 }
 .tela17-texto-longo {padding-left: 2rem; padding-right: 2rem;}
+
+  .tela17-referencias-colunas {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Ajustes para tablets (1000px - 1400px) */

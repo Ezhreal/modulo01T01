@@ -21,6 +21,7 @@ import iconBirdsBlue from './assets/images/icon-birds-blue.png'
 import iconTaca from './assets/images/icon-taca-white.png'
 import divisorYellow from './assets/images/divisor-yellow.png'
 import divisorBlue from './assets/images/divisor-blue.png'
+import bgTextoTitle from './assets/images/bg-texto-title.png'
 import tela06Img from './assets/images/tela06-img.png'
 import tela07Img from './assets/images/t07-img.png'
 import divBlueDir from './assets/images/divisor-blue-direita.png'
@@ -37,7 +38,18 @@ import flipCard05 from './assets/images/flip-card005.png'
 import tela14Slide01 from './assets/images/tela14-img-slide01.png'
 import tela14Slide02 from './assets/images/tela14-img-slide02.png'
 import tela16Img from './assets/images/tela16-img01.png'
+import slide05a from './assets/images/slide05-a.png'
+import slide05b from './assets/images/slide05-b.png'
+import slide05c from './assets/images/slide05-c.png'
+import slide10a from './assets/images/slide10-a.png'
+import slide10b from './assets/images/slide10-b.png'
+import videoTela03 from './assets/videos/P1_CRIANCA.mp4'
+import videoIdoso from './assets/videos/P1_IDOSO.mp4'
+import videoJovem1 from './assets/videos/P1_JOVEM.mp4'
+import videoJovem2 from './assets/videos/P2_JOVEM.mp4'
+import videoJovem3 from './assets/videos/P03_JOVEM.mp4'
 import Slide from './components/Slide'
+import './components/Slide.css'
 import CardsSlide from './components/CardsSlide'
 import './App.css'
 
@@ -49,6 +61,8 @@ function App() {
     // O scroll vai atualizar para a tela correta
     return 1
   })
+  const videosJovem = [videoJovem1, videoJovem2, videoJovem3]
+  const [tela07VideoIndex, setTela07VideoIndex] = useState(0)
 
   // Sincroniza URL com a tela atual (mas só se não estiver no topo)
   useEffect(() => {
@@ -96,7 +110,7 @@ function App() {
     return () => window.removeEventListener('load', checkInitialPosition)
   }, [])
 
-  // Detecta mudança de scroll e atualiza a tela atual
+  // Detecta mudança de scroll e atualiza a tela atual (URL e localStorage só no scroll)
   useEffect(() => {
     const handleScroll = () => {
       const sections = document.querySelectorAll('section[id^="tela"]')
@@ -109,27 +123,25 @@ function App() {
         const telaNum = parseInt(sectionId.replace('tela', ''))
 
         if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-          if (currentTela !== telaNum) {
-            setCurrentTela(telaNum)
+          setCurrentTela((prev) => {
+            if (prev === telaNum) return prev
             localStorage.setItem('lastTela', telaNum.toString())
             setSearchParams({ tela: telaNum.toString() }, { replace: true })
-          }
+            return telaNum
+          })
         }
       })
     }
 
-    // Verifica posição inicial
     handleScroll()
-    
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [currentTela, setSearchParams])
+  }, [setSearchParams])
 
-  // Salva a tela atual no localStorage quando muda
+  // Salva a tela atual no localStorage quando muda (URL já é atualizada no scroll)
   useEffect(() => {
     localStorage.setItem('lastTela', currentTela.toString())
-    setSearchParams({ tela: currentTela.toString() }, { replace: true })
-  }, [currentTela, setSearchParams])
+  }, [currentTela])
 
   // Toca o áudio quando muda de tela (apenas a partir da tela 2)
   useEffect(() => {
@@ -216,7 +228,7 @@ function App() {
                 <AnimatedElement animation="fadeUp" delay={0.3}>
                   <p className="tela02-texto font-garamond text-32">
                     <AnimatedText animation="fadeIn" stagger={0.05} delay={0.3}>
-                      Conhecer a própria história é compreender o sentido do presente. Nesta jornada, organizada em quatro módulos, você será convidado a percorrer a trajetória de Pe. Gailhac, passando por momentos decisivos de sua vida
+                      Conhecer a própria história é compreender o sentido do presente. Nesta jornada, organizada em quatro módulos, você será convidado a percorrer a trajetória de Pe. Gailhac, passando por momentos decisivos de sua vida.
                     </AnimatedText>
                   </p>
                 </AnimatedElement>
@@ -241,9 +253,10 @@ function App() {
                 <div className="tela02-bottom-text">
                   <p className="tela02-bottom-paragrafo font-inter-regular text-24">
                     <AnimatedText animation="fadeIn" stagger={0.05} delay={0.3}>
-                      Neste primeiro módulo, voltamos o olhar para a infância, tempo de formação, descobertas e silenciosos chamados. Começamos a compreender também, como uma vida marcada por desafios e escolhas corajosas deu origem à missão que hoje conhecemos como Rede Sagrado.
+                      Neste primeiro módulo, voltamos o olhar para a infância, tempo de formação, descobertas e silenciosos chamados. Começamos a compreender também, como uma vida marcada por desafios e escolhas corajosas deu origem à missão que hoje conhecemos como Rede Sagrado.<br></br>
                     </AnimatedText>
                   </p>
+
                 </div>
               </AnimatedElement>
             </div>
@@ -270,19 +283,29 @@ function App() {
                 <AnimatedText animation="fadeIn" stagger={0.05} delay={0.3}>
                   Para iniciar essa caminhada, convido você a assistir ao vídeo que apresenta minha infância e os primeiros sinais da missão que começava a se desenhar.
                 </AnimatedText>
-              </p>
+              </p>        
+                 
+                </AnimatedElement>
+            <AnimatedElement  animation="fadeUp" delay={0.3}>
+            <h2 className="tela-simples-play text-center font-inter-bold text-20 letter-spacing-20" >
+              <AnimatedText animation="fadeIn" stagger={0.1} delay={0.4}>
+                  DÊ O PLAY PARA CONFERIR!
+                  </AnimatedText>
+                  </h2>
             </AnimatedElement>
+           
             <AnimatedElement animation="fadeUp" delay={0.5}>
               <div className="tela-simples-video">
-                <iframe
+                <video
+                  src={videoTela03}
+                  controls
                   width="100%"
                   height="600"
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                  title="Vídeo"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
+                  title="Vídeo - Infância de Gailhac"
+                  playsInline
+                >
+                  Seu navegador não suporta a reprodução de vídeo.
+                </video>
               </div>
             </AnimatedElement>
           </div>
@@ -376,21 +399,29 @@ function App() {
             <NumberCircle number={4} color="var(--cor-amarelo-claro)" borderColor="var(--cor-amarelo-claro)" />
           </div>
          </AnimatedElement>
+              <div className="tela05-slides">
+                <AnimatedElement animation="fadeLeft" delay={0.2}>
+                  <img src={slide05a} alt="" className="tela05-slide-img" />
+                </AnimatedElement>
+                <AnimatedElement animation="fadeRight" delay={0.2}>
+                  <img src={slide05b} alt="" className="tela05-slide-img" />
+                </AnimatedElement>
+              </div>
               <AnimatedElement animation="fadeUp" delay={0.3}>
-                <div className="citacao">
-                  <p className="citacao-texto font-garamond text-42 text-shadow">
-                    <span className="citacao-aspas">"</span>
+                <div className="citacao citacao-tela05">
+                  <p className="citacao-texto font-garamond text-36 text-shadow">
                     <AnimatedText animation="fadeIn" stagger={0.08} delay={0.3}>
-                      Cresci próximo à igreja de Saint Aphrodise, um lugar decisivo para minha formação espiritual. Foi ali que conheci o Padre Jean-Jacques Martin, pároco da comunidade
+                      Cresci próximo à igreja de <strong>Saint Aphrodise</strong>, um lugar decisivo para minha formação espiritual. Foi ali que conheci o <strong>Padre Jean-Jacques Martin</strong>, pároco da comunidade.
                     </AnimatedText>
                   </p>
                 </div>
               </AnimatedElement>
               <AnimatedElement animation="fadeUp" delay={0.5}>
                 <div className="tela05-box-azul">
+                  <img src={slide05c} alt="" className="tela05-box-img" />
                   <p className="tela05-box-texto font-inter-regular text-24">
                     <AnimatedText animation="fadeIn" stagger={0.05} delay={0.5}>
-                      Ele havia sido perseguido durante a Revolução Francesa, vivera o exílio e retornara com uma fé firme e coerente. Tornou-se para mim um verdadeiro diretor espiritual. Com ele aprendi que a fé não se negocia, que a consciência precisa ser firme e que não devemos fugir das dificuldades.
+                      Ele havia sido perseguido durante a Revolução Francesa, vivera o exílio e retornara com uma fé firme e coerente. Tornou-se para mim um verdadeiro <strong>diretor espiritual</strong>. Com ele aprendi que a fé não se negocia, que a consciência precisa ser firme e que não devemos fugir das dificuldades.
                     </AnimatedText>
                   </p>
                 </div>
@@ -420,12 +451,12 @@ function App() {
             <div className="tela06-textos">
               <div className="tela06-texto-esquerda">
                 <p className="tela06-texto font-garamond text-36">
-                Ainda menino, comecei a compreender algo que nunca mais me abandonaria: problemas não desaparecem quando fechamos os olhos. É preciso sabedoria e “espinha dorsal” para permanecer de pé em meio às tempestades.
+                Ainda menino, comecei a compreender algo que nunca mais me abandonaria: <strong>problemas não desaparecem quando fechamos os olhos</strong>. É preciso sabedoria e “espinha dorsal” para permanecer de pé em meio às tempestades.
                 </p>
               </div>
               <div className="tela06-texto-direita">
                 <p className="tela06-texto font-garamond text-36">
-                Fui ordenado sacerdote em 23 de setembro de 1826 e logo pedi ao bispo para servir onde a dor humana fosse mais visível. Assim, tornei-me capelão do hospital civil e militar de Béziers.
+                Minha infância não foi apenas tempo de aprendizado, mas o alicerce de tudo o que viria depois. No próximo momento da minha vida, você conhecerá como essas experiências começaram a se transformar em escolhas concretas
                 </p>
               </div>
             </div>
@@ -435,12 +466,19 @@ function App() {
         <div className="divisor">
             <img src={divisorBlue}/>
           </div>
-          
+          <AnimatedElement animation="fadeUp" delay={0.2}>
+            <div className="tela06-proximo-wrap">
+              <img src={bgTextoTitle} alt="" className="tela06-proximo-icon" />
+              <p className="tela06-proximo-texto font-garamond text-36">
+                Siga para o próximo subtópico e conheça minha juventude, tempo em que os aprendizados da infância começaram a se transformar em escolhas concretas.
+              </p>
+            </div>
+          </AnimatedElement>
         </div>
       
       </section>
 
-      {/* Tela 07 - Tela Simples com Vídeo */}
+      {/* Tela 07 - Tela Simples com Vídeo (slideshow jovem) */}
       <section id="tela07" className="section tela-conteudo tela-simples bg-video">
         <div className="container">
           <div className="tela-simples-content">
@@ -461,19 +499,64 @@ function App() {
                 </AnimatedText>
               </p>
             </AnimatedElement>
-            <AnimatedElement animation="fadeUp" delay={0.5}>
-              <div className="tela-simples-video">
-                <iframe
-                  width="100%"
-                  height="600"
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                  title="Vídeo"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </div>
+            <AnimatedElement animation="fadeUp" delay={0.3}>
+              <h2 className="tela-simples-play text-center font-inter-bold text-20 letter-spacing-20">
+                <AnimatedText animation="fadeIn" stagger={0.1} delay={0.4}>
+                  Use as setas para navegar entre os vídeos e dê play para conferir.
+                </AnimatedText>
+              </h2>
             </AnimatedElement>
+            <AnimatedElement animation="fadeUp" delay={0.5}>
+              <div className="slide-container tela07-video-slideshow">
+                <div className="tela-simples-video">
+                  <video
+                    key={tela07VideoIndex}
+                    src={videosJovem[tela07VideoIndex]}
+                    controls
+                    width="100%"
+                    height="600"
+                    title={`Vídeo juventude ${tela07VideoIndex + 1}`}
+                    playsInline
+                  >
+                    Seu navegador não suporta a reprodução de vídeo.
+                  </video>
+                </div>
+                {videosJovem.length > 1 && (
+                  <div className="slide-buttons">
+                    {tela07VideoIndex > 0 && (
+                      <button
+                        type="button"
+                        className="slide-button slide-button-prev"
+                        onClick={() => setTela07VideoIndex((i) => i - 1)}
+                        aria-label="Vídeo anterior"
+                      >
+                        <span className="slide-button-text">ver anterior</span>
+                        <span className="slide-button-icon">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M15 18l-6-6 6-6"/>
+                          </svg>
+                        </span>
+                      </button>
+                    )}
+                    {tela07VideoIndex < videosJovem.length - 1 && (
+                      <button
+                        type="button"
+                        className="slide-button slide-button-next"
+                        onClick={() => setTela07VideoIndex((i) => i + 1)}
+                        aria-label="Próximo vídeo"
+                      >
+                        <span className="slide-button-text">ver próximo</span>
+                        <span className="slide-button-icon">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M9 18l6-6-6-6"/>
+                          </svg>
+                        </span>
+                      </button>
+                    )}
+                  </div>
+                )}
+              </div>
+            </AnimatedElement>         
           </div>
         </div>
       </section>
@@ -493,7 +576,7 @@ function App() {
                   <div>
                     <p className="tela08-texto font-garamond text-36">
                       <AnimatedText animation="fadeIn" stagger={0.05} delay={0.2}>
-                        Na juventude, compreendi que não bastava constatar os problemas do mundo. Era preciso agir. Nunca fui do tipo que esperou acontecer. Fiz acontecer. Jamais me contentei em ser apenas conduzido; assumi os riscos da liderança.
+                        Na juventude, compreendi que não bastava constatar os problemas do mundo. Era preciso agir. Nunca fui do tipo que esperou acontecer. <strong>Fiz acontecer</strong>. Jamais me contentei em ser apenas conduzido; assumi os riscos da liderança.
                       </AnimatedText>
                     </p>
                     <div className='divisor'>
@@ -557,7 +640,7 @@ function App() {
                         title: "1ª obra – O Hospital",
                         content: (
                           <div className="tela09-accordion-content">
-                            <p className="tela09-accordion-texto">
+                            <p className="tela09-accordion-texto text-24">
                               <AnimatedText animation="fadeIn" stagger={0.05} delay={0}>
                                 No hospital, convivi diariamente com doentes, feridos, pobres e abandonados. Vi de perto como a miséria, a doença e a exclusão ferem não apenas o corpo, mas também a dignidade humana. Aquela realidade moldou profundamente meu coração pastoral. Compreendi que cuidar da alma exige tocar as feridas da vida concreta.
                                 <br /><br />
@@ -571,7 +654,7 @@ function App() {
                         title: "2ª obra – O Refúgio do Bom Pastor",
                         content: (
                           <div className="tela09-accordion-content">
-                            <p className="tela09-accordion-texto">
+                            <p className="tela09-accordion-texto text-24">
                               <AnimatedText animation="fadeIn" stagger={0.05} delay={0}>
                                 O Refúgio não foi fruto de teoria, mas de urgência. Nunca me contentei em diagnosticar problemas; parti para a ação. Assumi riscos, enfrentei resistências e adotei como método o enfrentamento.
                               </AnimatedText>
@@ -616,16 +699,27 @@ function App() {
                   </p>
                 </div>
               </AnimatedElement>
-              <div className="citacao">
-              <p className="citacao-texto font-garamond text-42 text-shadow">
-                <span className="citacao-aspas">"</span>
-                Nessas horas, eu repetia:<br></br>Coragem, Deus é mais forte que os homens!”
-              </p>
-            </div>
+              <div className="tela10-slides">
+                <AnimatedElement animation="fadeLeft" delay={0.25}>
+                  <img src={slide10a} alt="" className="tela10-slide-img" />
+                </AnimatedElement>
+                <AnimatedElement animation="fadeRight" delay={0.25}>
+                  <img src={slide10b} alt="" className="tela10-slide-img" />
+                </AnimatedElement>
+              </div>
+              <AnimatedElement animation="fadeUp" delay={0.3}>
+                <div className="citacao citacao-tela10">
+                  <p className="citacao-texto-tela10 font-garamond text-36">
+                    <AnimatedText animation="fadeIn" stagger={0.05} delay={0.3}>
+                      Nessas horas, eu repetia:<br></br><strong>Coragem, Deus é mais forte que os homens!</strong>
+                    </AnimatedText>
+                  </p>
+                </div>
+              </AnimatedElement>
             <div className="tela10-box-azul">
               <p className="tela10-box-texto font-inter-regular text-24">
-              O bispo Dom Thibault, tentando proteger-me, chamou-me um dia e disse:<br></br>
-                “Encontre uma congregação feminina que possa ficar à frente do Refúgio.”
+              O <strong>bispo Dom Thibault</strong>, tentando proteger-me, chamou-me um dia e disse:<br></br>
+                <strong>“Encontre uma congregação feminina que possa ficar à frente do Refúgio.”</strong><br></br>
                 Mais uma vez, abri-me à vontade de Deus.
 
               </p>
@@ -665,21 +759,30 @@ function App() {
             <AnimatedElement animation="fadeUp" delay={0.3}>
               <p className="tela-simples-texto font-garamond text-32">
                 <AnimatedText animation="fadeIn" stagger={0.05} delay={0.3}>
-                  Para iniciar essa caminhada, convido você a assistir ao vídeo que apresenta minha infância e os primeiros sinais da missão que começava a se desenhar.
+                Assista ao vídeo e conheça o período da minha vida na maturidade, marcado pela consolidação das obras e pelo legado deixado às futuras gerações.
                 </AnimatedText>
               </p>
             </AnimatedElement>
+
+            <AnimatedElement  animation="fadeUp" delay={0.4}>
+            <h2 className="tela-simples-play text-center font-inter-bold text-20 letter-spacing-20" >
+              <AnimatedText animation="fadeIn" stagger={0.1} delay={0.4}>
+                  DÊ O PLAY PARA CONFERIR!
+                  </AnimatedText>
+                  </h2>
+            </AnimatedElement>
             <AnimatedElement animation="fadeUp" delay={0.5}>
               <div className="tela-simples-video">
-                <iframe
+                <video
+                  src={videoIdoso}
+                  controls
                   width="100%"
                   height="600"
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                  title="Vídeo"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
+                  title="Vídeo - Gailhac (idoso)"
+                  playsInline
+                >
+                  Seu navegador não suporta a reprodução de vídeo.
+                </video>
               </div>
             </AnimatedElement>
           </div>
@@ -698,8 +801,9 @@ function App() {
             <AnimatedElement animation="fadeLeft" delay={0.2}>
               <div className="tela12-coluna tela12-coluna-primeira">
                 <p className="tela12-texto font-garamond text-36">
+                  {"1."}<br />
                   <AnimatedText animation="fadeIn" stagger={0.05} delay={0.2}>
-                    A falta de continuidade prejudicava profundamente o trabalho com aquelas mulheres e meninas. Aos poucos, comecei a entender: todos aqueles obstáculos eram, na verdade, a semente de algo maior.
+                    As primeiras tentativas foram difíceis. As <strong>Dames de Saint Maur</strong> assumiram o Refúgio por dois anos. Foram tempos turbulentos. Eu queria uma coisa, elas outra. Sentia que o projeto inicial estava sendo descaracterizado.
                   </AnimatedText>
                 </p>
               </div>
@@ -707,8 +811,9 @@ function App() {
             <AnimatedElement animation="fadeUp" delay={0.3}>
               <div className="tela12-coluna tela12-coluna-meio">
                 <p className="tela12-texto font-garamond text-36">
+                  {"2."}<br />
                   <AnimatedText animation="fadeIn" stagger={0.05} delay={0.3}>
-                    As primeiras tentativas foram difíceis. As Dames de Saint Maur assumiram o Refúgio por dois anos. Foram tempos turbulentos. Eu queria uma coisa, elas outra. Sentia que o projeto inicial estava sendo descaracterizado.
+                    Tentei ainda as <strong>Sœurs de Saint Joseph de Lyon</strong>, as <strong>Sœurs de Marie-Joseph</strong> e até uma ex-freira chegou a assumir a direção do Refúgio. Nada funcionou.
                   </AnimatedText>
                 </p>
               </div>
@@ -716,8 +821,9 @@ function App() {
             <AnimatedElement animation="fadeRight" delay={0.4}>
               <div className="tela12-coluna tela12-coluna-terceira">
                 <p className="tela12-texto font-garamond text-36">
+                  {"3."}<br />
                   <AnimatedText animation="fadeIn" stagger={0.05} delay={0.4}>
-                    As primeiras tentativas foram difíceis. As Dames de Saint Maur assumiram o Refúgio por dois anos. Foram tempos turbulentos. Eu queria uma coisa, elas outra. Sentia que o projeto inicial estava sendo descaracterizado.
+                    A falta de continuidade prejudicava profundamente o trabalho com aquelas mulheres e meninas. Aos poucos, comecei a entender:<strong>todos aqueles obstáculos eram, na verdade, a semente de algo maior.</strong>
                   </AnimatedText>
                 </p>
               </div>
@@ -730,20 +836,23 @@ function App() {
           </AnimatedElement>
         </div>
         <div className="container">
+        <AnimatedElement animation="fadeUp" delay={0.4}>
+            <p className="font-garamond text-42 text-center text-white"> 
+            <AnimatedText animation="fadeIn" stagger={0.05} delay={0.2}>
+              Assim, dei início a minha minha semente maior, a 3ª obra!
+              </AnimatedText>
+              </p>
+            </AnimatedElement>
           <AnimatedElement animation="fadeIn" delay={0.3}>
             <div className="divisor">
               <img src={divisorYellow} alt="" />
             </div>
           </AnimatedElement>
+        
           
           <AnimatedElement animation="fadeUp" delay={0.6}>
             <div className="tela12-bg-title">
-              <p className="tela12-titulo-1 font-garamond text-32">
-                <AnimatedText animation="fadeIn" stagger={0.05} delay={0.6}>
-                  Assim, dei início a minha minha semente maior, a 3ª obra!
-                </AnimatedText>
-              </p>
-              <p className="tela12-titulo-2 font-garamond text-64">
+              <p className="tela12-titulo-2 font-garamond text-48">
                 <AnimatedText animation="fadeIn" stagger={0.05} delay={0.7}>
                   A Congregação do Sagrado Coração de Maria.
                 </AnimatedText>
@@ -754,7 +863,7 @@ function App() {
           <AnimatedElement animation="fadeUp" delay={0.8}>
             <p className="tela12-texto-longo font-inter-regular text-24">
               <AnimatedText animation="fadeIn" stagger={0.05} delay={0.8}>
-                Percebi que a obra é maior do que as pessoas. Entre minhas colaboradoras, algumas já caminhavam afinadas com meu ideal: Rosa Jeannet, Cecília Cambon, Eulália Vidal, Rosália Gibbal e Maria Roques. Rezávamos, convivíamos e esperávamos a hora de Deus.
+                Percebi que a obra é maior do que as pessoas. Entre minhas colaboradoras, algumas já caminhavam afinadas com meu ideal: <strong>Rosa Jeannet, Cecília Cambon, Eulália Vidal, Rosália Gibbal e Maria Roques</strong>. Rezávamos, convivíamos e esperávamos a hora de Deus.
               </AnimatedText>
             </p>
           </AnimatedElement>
@@ -791,7 +900,7 @@ function App() {
                 <div className="tela13-texto-esquerda">
                   <p className="tela13-texto font-garamond text-36">
                     <AnimatedText animation="fadeIn" stagger={0.05} delay={0.3}>
-                    Foi então que ocorreu a morte repentina de meu amigo e benfeitor Eugène Cure. Sua esposa, Apolônia, também grande colaboradora do Refúgio, decidiu consagrar-se a Deus e transferir seus bens para minhas obras. No início, resisti. Temi que fosse uma decisão tomada na dor. Sugeri que pensasse melhor. Mas Apolônia era firme. Aquilo já havia sido combinado entre ela e o marido.
+                    Foi então que ocorreu a morte repentina de meu amigo e benfeitor <strong>Eugène Cure</strong>. Sua esposa, <strong>Apolônia</strong>, também grande colaboradora do Refúgio, decidiu consagrar-se a Deus e transferir seus bens para minhas obras. No início, resisti. Temi que fosse uma decisão tomada na dor. Sugeri que pensasse melhor. Mas Apolônia era firme. Aquilo já havia sido combinado entre ela e o marido.
                     </AnimatedText>
                   </p>
                 </div>
@@ -800,7 +909,7 @@ function App() {
                 <div className="tela13-texto-direita">
                   <p className="tela13-texto font-garamond text-36">
                     <AnimatedText animation="fadeIn" stagger={0.05} delay={0.4}>
-                    Vieram novas calúnias. Diziam que eu me aproveitava da fragilidade de uma viúva rica. Seus parentes moveram contra mim uma ação judicial. Fui levado aos tribunais. Mantive o silêncio. A sentença foi clara: fui absolvido. Mesmo assim, doeu. A fofoca é um mal traiçoeiro, anônimo e cruel.
+                    Vieram novas calúnias. Diziam que eu me aproveitava da fragilidade de uma viúva rica. Seus parentes moveram contra mim uma ação judicial. Fui levado aos tribunais. Mantive o silêncio. A sentença foi clara: <strong>fui absolvido</strong>. Mesmo assim, doeu. A fofoca é um mal traiçoeiro, anônimo e cruel.
                     </AnimatedText>
                   </p>
                 </div>
@@ -816,7 +925,7 @@ function App() {
                   </div>
                   <p className="tela13-box-taca-texto font-inter-regular text-24">
                     <AnimatedText animation="fadeIn" stagger={0.05} delay={0.5}>
-                    Fundada a Congregação em 24 de fevereiro de 1849, novos desafios surgiram. A transição no Refúgio foi tensa. Houve resistência, conflitos e até intervenção policial. Minhas filhas espirituais viveram ali um verdadeiro “batismo de fogo”.
+                    Fundada a Congregação em <strong>24 de fevereiro de 1849</strong>, novos desafios surgiram. A transição no Refúgio foi tensa. Houve resistência, conflitos e até intervenção policial. Minhas filhas espirituais viveram ali um verdadeiro “batismo de fogo”.
                     </AnimatedText>
                   </p>
                 </div>
@@ -839,7 +948,7 @@ function App() {
                 <div className="tela13-texto-direita">
                   <p className="tela13-texto font-garamond text-36">
                     <AnimatedText animation="fadeIn" stagger={0.05} delay={0.7}>
-                    Inspirado no Bom Pastor, compreendi que não bastava acolher quem já havia caído. Era preciso prevenir.
+                    Inspirado no <strong>Bom Pastor</strong>, compreendi que não bastava acolher quem já havia caído. Era preciso prevenir.
                     </AnimatedText>
                   </p>
                 </div>
@@ -941,7 +1050,7 @@ function App() {
             <AnimatedElement animation="fadeUp" delay={0.2}>
               <p className="tela15-texto font-garamond text-36">
                 <AnimatedText animation="fadeIn" stagger={0.05} delay={0.2}>
-                  Vieram ainda novas acusações, inclusive de assassinato. Mais uma vez, a justiça revelou a verdade. Permaneci firme. Aprendi que a fé é como o aço: o fogo a torna mais forte.
+                  Vieram ainda novas acusações, inclusive de assassinato. Mais uma vez, a justiça revelou a verdade. Permaneci firme. Aprendi que a fé é como o aço: <strong>o fogo a torna mais forte</strong>.
                 </AnimatedText>
               </p>
             </AnimatedElement>
@@ -952,7 +1061,7 @@ function App() {
                   slides={[
                     {
                       image: tela14Slide01,
-                      text: 'Nos últimos anos, a visão enfraqueceu, o corpo cansou. Fui cuidado com ternura pelas irmãs, especialmente Irmã São-Félix. Celebrei minha última Eucaristia em 13 de novembro de 1889. Em 25 de janeiro de 1890, às três horas da tarde, após curta agonia, finalmente, minha vela se apagou.'
+                      text: 'Nos últimos anos, a visão enfraqueceu, o corpo cansou. Fui cuidado com ternura pelas irmãs, especialmente <strong>Irmã São-Félix</strong>. Celebrei minha última Eucaristia em <strong>13 de novembro de 1889</strong>. Em <strong>25 de janeiro de 1890</strong>, às três horas da tarde, após curta agonia, finalmente, minha vela se apagou.'
                     },
                     {
                       image: tela14Slide02,
@@ -1039,12 +1148,12 @@ function App() {
           </AnimatedElement>
           <AnimatedElement animation="fadeUp" delay={0.3}>
             <div className="tela17-bg-title">
-              <p className="tela17-titulo-1 font-garamond text-32">
+              <p className="tela17-titulo-1 font-garamond text-32 letter-spacing-20">
                 <AnimatedText animation="fadeIn" stagger={0.05} delay={0.3}>
                   Minha história não termina aqui
                 </AnimatedText>
               </p>
-              <p className="tela17-titulo-2 font-garamond text-48">
+              <p className="tela17-titulo-2 font-garamond text-36">
                 <AnimatedText animation="fadeIn" stagger={0.05} delay={0.4}>
                   Ao meu lado, esteve uma mulher decisiva, cuja coragem, fidelidade e entrega marcaram profundamente essa missão.
                 </AnimatedText>
@@ -1053,16 +1162,50 @@ function App() {
           </AnimatedElement>
 
           <AnimatedElement animation="fadeUp" delay={0.5}>
-            <p className="tela17-texto-longo font-inter-regular text-24">
-              <AnimatedText animation="fadeIn" stagger={0.05} delay={0.5}>
-                No próximo tópico, você conhecerá a história da Irmã Saint Jean, mulher de fé e protagonista silenciosa dessa caminhada.
-              </AnimatedText>
-            </p>
+            <div className="tela17-textos-cta">
+              <p className="tela17-texto-longo font-inter-regular text-24">
+                <AnimatedText animation="fadeIn" stagger={0.05} delay={0.5}>
+                  <strong>No próximo tópico, você conhecerá a história da Irmã Saint Jean</strong>, mulher de fé e protagonista silenciosa dessa caminhada.
+                </AnimatedText>
+              </p>
+              <p className="tela17-texto-longo font-inter-regular text-36">
+                <AnimatedText animation="fadeIn" stagger={0.06} delay={0.6}>
+                  <strong>Siga para o Tópico 2 e continue essa história conosco.</strong>
+                </AnimatedText>
+              </p>
+            </div>
           </AnimatedElement>
 
           <AnimatedElement animation="fadeIn" delay={0.1}>
-            <div className="divisor">
+            <div className="divisor tela17-divisor">
               <img src={divisorYellow} alt="" />
+            </div>
+          </AnimatedElement>
+
+          <AnimatedElement animation="fadeUp" delay={0.6}>
+            <div className="tela17-referencias">
+              <h3 className="tela17-referencias-titulo font-inter-bold text-20">Referências</h3>
+              <div className="tela17-referencias-colunas">
+                <div className="tela17-referencias-coluna">
+                  <p className="tela17-ref font-inter-regular text-20">
+                    CONGREGAÇÃO DAS RELIGIOSAS DO SAGRADO CORAÇÃO DE MARIA. <em>Vida e obra do Padre Gailhac.</em> Béziers: Edição Institucional, s.d.
+                  </p>
+                  <p className="tela17-ref font-inter-regular text-20">
+                    REDE SAGRADO. Pe. Gailhac: história, vida e missão. Disponível em: &lt;https://www.redesagrado.com.br&gt;. Acesso em: 09/01/2026.
+                  </p>
+                  <p className="tela17-ref font-inter-regular text-20">
+                    GAILHAC, Louis. <em>Cartas e escritos espirituais.</em> Béziers: Arquivo Histórico do Sagrado Coração de Maria, s.d.
+                  </p>
+                </div>
+                <div className="tela17-referencias-coluna">
+                  <p className="tela17-ref font-inter-regular text-20">
+                    IGREJA CATÓLICA. <em>Processo de venerabilidade de Louis Gailhac.</em> Vaticano: Congregação para as Causas dos Santos, s.d.
+                  </p>
+                  <p className="tela17-ref font-inter-regular text-20">
+                    REDE SAGRADO. História do Padre Gailhac. Slides institucionais fornecidos para desenvolvimento de material educacional. São Paulo: Rede Sagrado, 2026.
+                  </p>
+                </div>
+              </div>
             </div>
           </AnimatedElement>
         </div>
