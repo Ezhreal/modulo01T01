@@ -43,11 +43,6 @@ import slide05b from './assets/images/slide05-b.png'
 import slide05c from './assets/images/slide05-c.png'
 import slide10a from './assets/images/slide10-a.png'
 import slide10b from './assets/images/slide10-b.png'
-import videoTela03 from './assets/videos/P1_CRIANCA.mp4'
-import videoIdoso from './assets/videos/P1_IDOSO.mp4'
-import videoJovem1 from './assets/videos/P1_JOVEM.mp4'
-import videoJovem2 from './assets/videos/P2_JOVEM.mp4'
-import videoJovem3 from './assets/videos/P03_JOVEM.mp4'
 import Slide from './components/Slide'
 import './components/Slide.css'
 import CardsSlide from './components/CardsSlide'
@@ -61,7 +56,14 @@ function App() {
     // O scroll vai atualizar para a tela correta
     return 1
   })
-  const videosJovem = [videoJovem1, videoJovem2, videoJovem3]
+  const baseUrl = import.meta.env.BASE_URL
+  const videoTela03 = baseUrl + 'videos/P1_CRIANCA.mp4'
+  const videoIdoso = baseUrl + 'videos/P1_IDOSO.mp4'
+  const videosJovem = [
+    baseUrl + 'videos/P1_JOVEM.mp4',
+    baseUrl + 'videos/P2_JOVEM.mp4',
+    baseUrl + 'videos/P03_JOVEM.mp4'
+  ]
   const [tela07VideoIndex, setTela07VideoIndex] = useState(0)
 
   // Sincroniza URL com a tela atual (mas só se não estiver no topo)

@@ -105,19 +105,19 @@ O GitHub Actions fará o deploy automaticamente em alguns minutos!
 ## ❓ Problemas Comuns
 
 ### ❌ GH001: Large files detected / arquivo excede 100 MB (vídeos)
-O GitHub **não aceita** arquivos maiores que **100 MB** no repositório. Os vídeos em `src/assets/videos/` passam desse limite, então é preciso usar **Git LFS**.
+O GitHub **não aceita** arquivos maiores que **100 MB** no repositório. Os vídeos ficam em **`public/videos/`** e precisam ser versionados com **Git LFS**.
 
-**Opção A – Script automático (recomendado)**
+O **build no GitHub Actions não depende mais dos vídeos** (o site usa URLs), então o workflow passa mesmo sem os arquivos. Para os vídeos aparecerem no site publicado:
 
-1. **Instale o Git LFS** no PC (uma vez só): [git-lfs.github.com](https://git-lfs.github.com) ou `winget install GitHub.GitLFS`. Depois rode `git lfs install` em um terminal novo.
+1. **Copie** os `.mp4` de `src/assets/videos/` para **`public/videos/`** (P1_CRIANCA.mp4, P1_IDOSO.mp4, P1_JOVEM.mp4, P2_JOVEM.mp4, P03_JOVEM.mp4).
 
-2. Na **pasta do projeto**, execute:
+2. **Instale o Git LFS** no PC (uma vez só): [git-lfs.github.com](https://git-lfs.github.com) ou `winget install GitHub.GitLfs`. Depois rode `git lfs install` em um terminal novo.
+
+3. Na **pasta do projeto**, execute:
    ```powershell
    .\fix-lfs.ps1
    ```
-3. Depois rode: `git push`
-
-**Opção B – Manual** (se o script der erro): instale o Git LFS, rode `git lfs install` no projeto, depois execute os comandos descritos no próprio script `fix-lfs.ps1` (filter-branch, add, commit, push).
+4. Depois rode: `git push --force origin main`
 
 ### ❌ Erro 404: "There isn't a GitHub Pages site here"
 **Solução completa:** Veja o arquivo `TROUBLESHOOTING.md` para um guia detalhado.

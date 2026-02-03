@@ -1,6 +1,7 @@
-# Script: corrigir push rejeitado por arquivos grandes (vídeos)
-# Remove os .mp4 do historico e re-adiciona com Git LFS.
+# Script: corrigir push rejeitado por arquivos grandes (videos)
+# Converte os .mp4 em public/videos/ para Git LFS e reescreve o historico.
 # Execute na pasta do repositorio: .\fix-lfs.ps1
+# Antes: copie os .mp4 de src/assets/videos/ para public/videos/
 
 Write-Host "=== Corrigindo videos para Git LFS ===" -ForegroundColor Cyan
 
@@ -18,19 +19,8 @@ try {
 Write-Host "`nAtivando Git LFS no repo..." -ForegroundColor Green
 git lfs install
 
-# 3. Remover os videos de TODO o historico (assim o push aceita)
-Write-Host "`nRemovendo videos do historico (pode demorar)..." -ForegroundColor Green
-git filter-branch --force --index-filter "git rm --cached --ignore-unmatch src/assets/videos/P03_JOVEM.mp4 src/assets/videos/P1_JOVEM.mp4 src/assets/videos/P2_JOVEM.mp4 src/assets/videos/P1_CRIANCA.mp4 src/assets/videos/P1_IDOSO.mp4" --prune-empty --tag-name-filter cat -- --all
+# 3. Converter videos no historico para LFS (reescreve commits)
+Write-Host "`nConvertendo videos para LFS no historico (pode demorar)..." -ForegroundColor Green
+git lfs migrate import --include="public/videos/*.mp4" --everything
 
-# 4. Adicionar .gitattributes e videos com LFS
-Write-Host "`nAdicionando .gitattributes e videos com LFS..." -ForegroundColor Green
-git add .gitattributes
-git add src/assets/videos/
-git add .
-git status
-
-# 5. Commit com os videos em LFS
-Write-Host "`nCriando commit com videos em LFS..." -ForegroundColor Green
-git commit -m "Adiciona videos com Git LFS"
-
-Write-Host "`n=== Pronto. Agora rode: git push ===" -ForegroundColor Cyan
+Write-Host "`n=== Pronto. Agora rode: git push --force origin main ===" -ForegroundColor Cyan

@@ -1,4 +1,2 @@
-# Vídeos ignorados no .gitignore (subir manualmente)
-# LFS removido para esta pasta
-src/assets/videos/*.mp4 filter=lfs diff=lfs merge=lfs -text
+# Git LFS - vídeos (GitHub limita 100 MB por arquivo)
 public/videos/*.mp4 filter=lfs diff=lfs merge=lfs -text
