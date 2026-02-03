@@ -28,3 +28,6 @@ dist-ssr
 .env.local
 .env.production.local
 .env.development.local
+
+# Vídeos (subir manualmente para o servidor / não versionar no Git)
+src/assets/videos/
