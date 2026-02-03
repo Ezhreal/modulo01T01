@@ -76,8 +76,34 @@ npm install
 npm run dev
 ```
 
-## Build
+## Build e entrega
+
+**Um único build.** O cliente **não configura nada**: só recebe a pasta **`dist`** e sobe no servidor no caminho que quiser.
 
 ```bash
 npm run build
 ```
+
+Funciona em qualquer URL: raiz (`https://site.com/`), 1 pasta (`/modulo01T01/`), 2 (`/modulo01/topico01/`), 3 (`/curso/modulo01/topico01/`). O app detecta o caminho sozinho.
+
+Entrega: zip da pasta **`dist`** (ou envio dos arquivos). O cliente publica onde quiser.
+
+---
+
+## Testar localmente
+
+**Desenvolvimento** (hot reload):
+
+```bash
+npm run dev
+```
+
+Abre em `http://localhost:3099`.
+
+**Testar o build** (gera `dist` e sobe servidor):
+
+```bash
+npm run start
+```
+
+Abre em `http://localhost:3000`. Para simular subpasta: `http://localhost:3000/modulo01/` ou `http://localhost:3000/modulo01/topico01/`.

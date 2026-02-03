@@ -1,10 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// Deve ser o nome do repositório no GitHub (ex.: usuario.github.io/modulo01T01/)
+// Base relativo: um único build funciona em qualquer caminho
+// (raiz, /modulo01/, /modulo01/topico01/, etc.). O cliente só sobe a pasta.
 export default defineConfig({
   plugins: [react()],
-  base: '/modulo01T01/',
+  base: './',
   server: {
     port: 3099,
     open: true
