@@ -369,7 +369,7 @@ function App() {
                 </div>
               </AnimatedElement>
               <AnimatedElement animation="fadeUp" delay={0.4}>
-                <p className="tela04-texto font-inter-regular text-24 text-end">
+                <p className="tela04-texto font-garamond text-32 text-end">
                   <AnimatedText animation="fadeIn" stagger={0.05} delay={0.4}>
                     Ainda criança, perdi meu pai. Essa perda marcou profundamente minha história. A dor me fez amadurecer antes do tempo e despertou em mim uma sensibilidade especial para com aqueles que sofrem. Foi minha mãe quem sustentou nossa casa e minha fé, ensinando-me que confiar em Deus não significa ausência de dor, mas coragem para atravessá-la.
                   </AnimatedText>
@@ -458,7 +458,7 @@ function App() {
               </div>
               <div className="tela06-texto-direita">
                 <p className="tela06-texto font-garamond text-36">
-                Minha infância não foi apenas tempo de aprendizado, mas o alicerce de tudo o que viria depois. No próximo momento da minha vida, você conhecerá como essas experiências começaram a se transformar em escolhas concretas
+                Minha infância não foi apenas tempo de aprendizado, mas o alicerce de tudo o que viria depois. No próximo momento da minha vida, você conhecerá como essas experiências começaram a se transformar em escolhas concretas.
                 </p>
               </div>
             </div>
