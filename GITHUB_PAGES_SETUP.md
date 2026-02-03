@@ -114,11 +114,51 @@ O GitHub Actions fará o deploy automaticamente em alguns minutos!
 4. Aguarde 5-10 minutos após o workflow terminar
 5. Verifique se **Source** está como **"GitHub Actions"** em Settings > Pages
 
+### ❌ Erro: "Get Pages site failed" / "HttpError: Not Found" (actions/configure-pages)
+Esse erro aparece quando o repositório **não tem GitHub Pages habilitado** ou está usando **"Deploy from a branch"** em vez de **GitHub Actions**.
+
+**Solução:**
+1. No GitHub, abra o repositório e vá em **Settings** (Configurações).
+2. No menu lateral, clique em **Pages**.
+3. Em **Build and deployment** > **Source**, selecione **GitHub Actions** (não use "Deploy from a branch").
+4. Salve. Não é necessário escolher branch nem pasta.
+5. Rode o workflow de novo: **Actions** > workflow "Deploy to GitHub Pages" > **Re-run all jobs**.
+
+Se **Pages** não aparecer no menu ou estiver desativado, verifique se sua conta permite GitHub Pages (repositórios públicos têm Pages grátis).
+
+### ❌ "The job was not acquired by Runner of type hosted even after multiple attempts"
+Significa que o GitHub **não conseguiu alocar um runner** para o job (fila cheia ou **incidente em Actions**).
+
+**O que fazer:**
+1. Confira [GitHub Status](https://www.githubstatus.com/) – se **Actions** ou **Pages** estiverem em "Incident" ou "Degraded", é problema do GitHub; espere a resolução e depois **Re-run all jobs**.
+2. Se estiver tudo verde, espere 30–60 min e rode de novo: **Actions** > **Deploy to GitHub Pages** > **Re-run all jobs**.
+3. Repositório **público** = minutos ilimitados; se for **privado**, verifique **Settings** > **Billing**.
+
+### ❌ "Internal server error" (Deploy to GitHub Pages) / Correlation ID: ...
+Erro **interno do GitHub**, não do seu projeto.
+
+**O que fazer:**
+1. **Re-execute o workflow**: **Actions** > **Deploy to GitHub Pages** > **Re-run all jobs**.
+2. Se continuar, espere algumas horas e tente de novo; costuma ser instável por pouco tempo.
+3. Veja [GitHub Status](https://www.githubstatus.com/) para saber se há incidente em andamento.
+
+### ⏳ Job fica "Waiting for a runner" ou build demora muito (7+ min)
+- **"Waiting for a runner"**: é a fila do GitHub. Em horário de pico ou em contas gratuitas pode levar vários minutos até um runner ficar livre. Não há como acelerar; espere ou cancele e rode de novo mais tarde (**Actions** > **Re-run all jobs**).
+- **Build lento**: o primeiro build costuma ser mais lento (download de dependências). Os próximos tendem a ser mais rápidos por causa do cache. O workflow foi ajustado com `timeout-minutes: 15` e mensagens no log para você acompanhar o progresso (Instalando dependências… / Iniciando build… / Build concluído).
+
 ### Site não aparece
 - Aguarde 5-10 minutos após o primeiro deploy
 - Verifique se o workflow terminou com sucesso em **Actions**
 - Verifique se o GitHub Pages está ativado em **Settings** > **Pages**
 - Limpe o cache do navegador (Ctrl+F5)
+
+### ❌ 404 em index-xxx.js / index-xxx.css (assets não carregam)
+O site está sendo aberto na **URL errada** ou o navegador está com **cache antigo**.
+
+**O que fazer:**
+1. Abra o site na URL correta: **`https://SEU_USUARIO.github.io/modulo01T01/`** (com o nome exato do repositório e barra no final).
+2. **Limpe o cache** ou faça hard refresh: **Ctrl+Shift+R** (Windows/Linux) ou **Cmd+Shift+R** (Mac).
+3. Se o repositório tiver **outro nome** (ex.: `Modulos`), altere no `vite.config.js`: `base: '/NOME_DO_REPO/'`, faça novo build e deploy.
 
 ### Imagens não carregam
 - Verifique se o `base` no `vite.config.js` está correto

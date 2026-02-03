@@ -19,6 +19,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,14 +27,21 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          echo "Instalando dependências..."
+          npm ci --prefer-offline --no-audit
+          echo "Dependências instaladas."
 
       - name: Build
-        run: npm run build
+        run: |
+          echo "Iniciando build (Vite)..."
+          npm run build
+          echo "Build concluído."
+          ls -la dist/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

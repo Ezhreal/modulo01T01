@@ -5,9 +5,11 @@ import { AudioProvider } from './contexts/AudioContext'
 import App from './App'
 import './index.css'
 
+// basename para GitHub Pages (site em /nome-do-repo/) ou raiz
+const basename = import.meta.env.BASE_URL
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <AudioProvider>
         <App />
       </AudioProvider>
